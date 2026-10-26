@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ServiceDetail } from "@/config/servicesData";
-import { getWhatsAppLink } from "@/config/businessInfo";
+import { getWhatsAppLink, getPhoneLink } from "@/config/businessInfo";
 import {
   Sparkles,
   Zap,
@@ -21,6 +21,7 @@ import {
   CheckCircle,
   Clock,
   MessageCircle,
+  Phone,
 } from "lucide-react";
 
 interface ServiceCardProps {
@@ -101,7 +102,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
       </div>
 
       {/* Action Footer */}
-      <div className="px-6 py-4 bg-gray-50/80 border-t border-gray-100 flex items-center justify-between gap-3">
+      <div className="px-5 py-3.5 bg-gray-50/90 border-t border-gray-100 flex items-center justify-between gap-2">
         {onOpenModal ? (
           <button
             onClick={() => onOpenModal(service)}
@@ -120,16 +121,27 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
           </Link>
         )}
 
-        <a
-          href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs transition-colors inline-flex items-center gap-1.5"
-          title="Inquire on WhatsApp"
-        >
-          <MessageCircle className="w-3.5 h-3.5" />
-          <span>Contact Us</span>
-        </a>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <a
+            href={getPhoneLink()}
+            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-900 text-white shadow-xs transition-colors inline-flex items-center gap-1.5 active:scale-95"
+            title={`Call Smart Facility Services about ${service.title}`}
+          >
+            <Phone className="w-3.5 h-3.5 text-emerald-300" />
+            <span>Call</span>
+          </a>
+
+          <a
+            href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs transition-colors inline-flex items-center gap-1.5 active:scale-95"
+            title={`Inquire about ${service.title} on WhatsApp`}
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-white" />
+            <span>WhatsApp</span>
+          </a>
+        </div>
       </div>
     </div>
   );

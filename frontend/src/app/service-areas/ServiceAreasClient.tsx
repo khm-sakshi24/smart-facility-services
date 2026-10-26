@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   Phone,
   MessageCircle,
-  HelpCircle,
   Clock,
   ExternalLink,
   Navigation,
@@ -166,40 +165,6 @@ export const ServiceAreasClient: React.FC = () => {
               <p className="text-xs text-gray-600 leading-relaxed">{hl.description}</p>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Service Area FAQs */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <HelpCircle className="w-5 h-5 text-forest-800" />
-          <span>Service Area FAQs</span>
-        </h2>
-        <div className="space-y-4 text-sm text-gray-700">
-          <div className="bg-white p-5 rounded-2xl border border-gray-200 space-y-1.5">
-            <h3 className="font-bold text-gray-900">
-              Is my property eligible if it is outside Hoodi or Whitefield?
-            </h3>
-            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              Yes. While Whitefield, Hoodi, and Garudachar Palya are our core operational hubs, we support residential layouts and commercial properties across Bengaluru based on property scale and schedule feasibility. Contact Smart Facility Services at {businessInfo.primaryPhoneDisplay} to confirm site availability.
-            </p>
-          </div>
-          <div className="bg-white p-5 rounded-2xl border border-gray-200 space-y-1.5">
-            <h3 className="font-bold text-gray-900">
-              How quickly can an operations supervisor visit our property?
-            </h3>
-            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              For properties within Hoodi, Garudachar Palya, and Whitefield, physical site inspections can typically be scheduled within 24 to 48 business hours following direct phone or WhatsApp contact.
-            </p>
-          </div>
-          <div className="bg-white p-5 rounded-2xl border border-gray-200 space-y-1.5">
-            <h3 className="font-bold text-gray-900">
-              Do you offer 24/7 emergency response for critical breakdowns?
-            </h3>
-            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              Yes. For registered residential apartment communities and commercial clients, we coordinate emergency breakdown assistance for critical water pumps, main electrical tripping, and STP/WTP issues 24 hours a day, 7 days a week.
-            </p>
-          </div>
         </div>
       </div>
 
