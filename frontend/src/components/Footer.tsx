@@ -12,23 +12,23 @@ export const Footer: React.FC = () => {
     <footer className="bg-forest-950 text-gray-300 border-t border-forest-900 pb-20 md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand Info */}
+          {/* Brand Info with Big Prominent Logo */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-white shadow-md border-2 border-emerald-500/40 p-0.5 shrink-0">
+            <div className="flex items-center space-x-4">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-2xl border-3 border-emerald-400 p-0.5 shrink-0 ring-4 ring-emerald-400/25">
                 <Image
                   src="/images/logo.png"
                   alt="Smart Facility Services Company Logo"
-                  width={48}
-                  height={48}
+                  width={96}
+                  height={96}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
               <div>
-                <span className="font-extrabold text-lg text-white tracking-tight block">
+                <span className="font-black text-2xl sm:text-3xl text-white tracking-tight block leading-tight">
                   {businessInfo.name}
                 </span>
-                <p className="text-xs text-emerald-400 font-medium">
+                <p className="text-xs sm:text-sm text-emerald-400 font-extrabold uppercase tracking-wide">
                   {businessInfo.tagline}
                 </p>
               </div>

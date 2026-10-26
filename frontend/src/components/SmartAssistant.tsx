@@ -439,12 +439,12 @@ export const SmartAssistant: React.FC = () => {
           aria-label="Open Smart Facility Assistant Chat"
           title="Open Smart Facility Assistant"
         >
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-xs shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-md border border-emerald-400 shrink-0">
             <Image
               src="/images/logo.png"
               alt="Smart Facility Services"
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               className="w-full h-full object-cover rounded-full"
             />
           </div>
@@ -471,12 +471,12 @@ export const SmartAssistant: React.FC = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-forest-950 via-forest-900 to-emerald-900 text-white p-4 flex items-center justify-between border-b border-emerald-800/50">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 shadow-xs border border-emerald-400/50">
+              <div className="w-11 h-11 rounded-full overflow-hidden bg-white p-0.5 shadow-md border-2 border-emerald-400 shrink-0">
                 <Image
                   src="/images/logo.png"
                   alt="Logo"
-                  width={38}
-                  height={38}
+                  width={44}
+                  height={44}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>

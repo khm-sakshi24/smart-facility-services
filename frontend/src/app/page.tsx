@@ -112,6 +112,25 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
+            {/* Prominent Company Logo: Big, Crisp & Professional Centerpiece */}
+            <div className="flex flex-col items-center justify-center mb-2">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full overflow-hidden bg-white shadow-[0_20px_50px_rgba(6,78,59,0.18)] border-4 sm:border-[5px] border-emerald-600/70 p-1 sm:p-1.5 ring-8 sm:ring-[12px] ring-emerald-500/15 hover:scale-105 hover:ring-emerald-500/30 transition-all duration-300 shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Smart Facility Services Company Logo"
+                  width={176}
+                  height={176}
+                  priority
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </div>
+              <div className="mt-3 text-center">
+                <span className="font-black text-xs sm:text-sm tracking-widest uppercase text-emerald-800 bg-emerald-100/80 px-3.5 py-1 rounded-full border border-emerald-300/80 shadow-2xs">
+                  Smart Facility Services • Bengaluru
+                </span>
+              </div>
+            </div>
+
             {/* Tagline & 24/7 Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest-900 text-white text-xs font-semibold shadow-2xs">
@@ -289,7 +308,7 @@ export default function HomePage() {
               <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
                 Strict Compliance
               </p>
-              <p className="text-[11px] text-gray-500">KSPCB &amp; safety certified</p>
+              <p className="text-[11px] text-gray-500">Tap for standards &rarr;</p>
             </div>
           </a>
         </div>

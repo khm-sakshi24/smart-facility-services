@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Image from "next/image";
 import { servicesCatalogue, ServiceDetail } from "@/config/servicesData";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ServiceDetailModal } from "@/components/ServiceDetailModal";
@@ -49,47 +50,59 @@ export default function ServicesPage() {
 
       <Breadcrumb items={[{ label: "Services Catalogue" }]} />
 
-      {/* Header */}
-      <div className="max-w-3xl space-y-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-            Professional Facility Support
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
-            <Clock className="w-3.5 h-3.5 text-emerald-700" />
-            <span>24/7 Support Available</span>
-          </span>
+      {/* Header with Big Prominent Logo */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden bg-white shadow-2xl border-4 sm:border-[5px] border-emerald-600/70 p-1 shrink-0 ring-8 ring-emerald-500/15 hover:scale-105 transition-all duration-300">
+          <Image
+            src="/images/logo.png"
+            alt="Smart Facility Services Company Logo"
+            width={160}
+            height={160}
+            priority
+            className="w-full h-full object-cover rounded-full"
+          />
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
-          Facility Services Catalogue
-        </h1>
-        <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
-          Smart Facility Services provides 24/7 maintenance solutions for residential communities, apartment complexes, commercial buildings, and offices in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.
-        </p>
+        <div className="max-w-3xl space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              Professional Facility Support
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
+              <Clock className="w-3.5 h-3.5 text-emerald-700" />
+              <span>24/7 Support Available</span>
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
+            Facility Services Catalogue
+          </h1>
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
+            Smart Facility Services provides 24/7 maintenance solutions for residential communities, apartment complexes, commercial buildings, and offices in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.
+          </p>
+        </div>
+      </div>
 
-        {/* Quick Contact Bar */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-forest-50 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
-            Have questions about any service? Speak directly with our operations team.
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto">
-            <a
-              href={getPhoneLink()}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-xs transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-emerald-300" />
-              <span>Call {businessInfo.primaryPhoneDisplay}</span>
-            </a>
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs transition-colors"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
+      {/* Quick Contact Bar */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-forest-50 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
+          Have questions about any service? Speak directly with our operations team.
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto">
+          <a
+            href={getPhoneLink()}
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-xs transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5 text-emerald-300" />
+            <span>Call {businessInfo.primaryPhoneDisplay}</span>
+          </a>
+          <a
+            href={getWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            <span>WhatsApp</span>
+          </a>
         </div>
       </div>
 
@@ -103,33 +116,24 @@ export default function ServicesPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search services (e.g., pump, pool, cleaning, STP)..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 shadow-2xs"
+              placeholder="Search across all 13 services (e.g. STP, plumbing, pool)..."
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-2xs"
             />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
-              >
-                Clear
-              </button>
-            )}
           </div>
 
-          <div className="text-xs text-gray-500 font-medium text-right sm:text-left">
-            Showing <strong>{filteredServices.length}</strong> of <strong>{servicesCatalogue.length}</strong> services
-          </div>
+          <span className="text-xs text-gray-500 self-center sm:self-auto font-medium">
+            Showing <strong>{filteredServices.length}</strong> of {servicesCatalogue.length} facility disciplines
+          </span>
         </div>
 
-        {/* Category Tabs */}
+        {/* Categories Tab Scroll Strip */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border ${
                 selectedCategory === cat
                   ? "bg-forest-800 text-white border-forest-900 shadow-xs"
                   : "bg-white text-gray-700 border-gray-200 hover:bg-emerald-50 hover:border-emerald-300"
@@ -141,22 +145,23 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* Services Grid (Filtered Results) */}
+      {/* Services Grid with Direct Call & WhatsApp Action Buttons */}
       {filteredServices.length === 0 ? (
-        <div className="p-12 text-center bg-gray-50 rounded-3xl border border-gray-200 space-y-3">
-          <p className="text-base font-bold text-gray-800">No services matched "{searchQuery}"</p>
+        <div className="bg-white rounded-3xl p-12 text-center border border-gray-200 space-y-3">
+          <p className="text-base text-gray-700 font-semibold">
+            No services matched &ldquo;{searchQuery}&rdquo;.
+          </p>
           <p className="text-xs text-gray-500">
-            Try searching for "pump", "housekeeping", "electrical", or select "All Services".
+            Try a different term or clear the search to view all 13 services.
           </p>
           <button
-            type="button"
             onClick={() => {
               setSearchQuery("");
               setSelectedCategory("All Services");
             }}
-            className="text-xs font-bold text-emerald-700 underline underline-offset-4"
+            className="px-4 py-2 rounded-xl bg-forest-800 text-white text-xs font-bold"
           >
-            Reset Filters
+            Reset All Filters
           </button>
         </div>
       ) : (

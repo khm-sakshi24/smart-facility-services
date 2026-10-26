@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
 import {
@@ -93,23 +94,35 @@ export default function ContactPage() {
 
       <Breadcrumb items={[{ label: "Contact Us" }]} />
 
-      {/* Page Header */}
-      <div className="max-w-3xl space-y-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-            Direct Facility Communication
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
-            <Clock className="w-3.5 h-3.5 text-emerald-700" />
-            <span>24/7 Emergency Support Available</span>
-          </span>
+      {/* Page Header with Company Logo */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden bg-white shadow-2xl border-4 sm:border-[5px] border-emerald-600/70 p-1 shrink-0 ring-8 ring-emerald-500/15 hover:scale-105 transition-all duration-300">
+          <Image
+            src="/images/logo.png"
+            alt="Smart Facility Services Company Logo"
+            width={160}
+            height={160}
+            priority
+            className="w-full h-full object-cover rounded-full"
+          />
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
-          Contact Smart Facility Services
-        </h1>
-        <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
-          Reach out directly to discuss your residential society, apartment association, or commercial facility maintenance requirements. We are available 24/7 for emergency coordination and property consultations.
-        </p>
+        <div className="max-w-3xl space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              Direct Facility Communication
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
+              <Clock className="w-3.5 h-3.5 text-emerald-700" />
+              <span>24/7 Emergency Support Available</span>
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
+            Contact Smart Facility Services
+          </h1>
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
+            Reach out directly to discuss your residential society, apartment association, or commercial facility maintenance requirements. We are available 24/7 for emergency coordination and property consultations.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

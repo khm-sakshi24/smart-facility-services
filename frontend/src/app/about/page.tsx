@@ -29,14 +29,15 @@ export default function AboutPage() {
 
       <Breadcrumb items={[{ label: "About Us" }]} />
 
-      {/* Header with Company Logo */}
+      {/* Header with Company Logo: Big, Crisp & Prestigious */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-lg border-2 border-emerald-500/30 p-1 shrink-0">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden bg-white shadow-2xl border-4 sm:border-[5px] border-emerald-600/70 p-1 shrink-0 ring-8 ring-emerald-500/15 hover:scale-105 transition-all duration-300">
           <Image
             src="/images/logo.png"
             alt="Smart Facility Services Company Logo"
-            width={96}
-            height={96}
+            width={160}
+            height={160}
+            priority
             className="w-full h-full object-cover rounded-full"
           />
         </div>
