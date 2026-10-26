@@ -30,7 +30,7 @@ export const WelcomeAnnouncement: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-forest-950 via-forest-900 to-emerald-950 text-white text-xs sm:text-sm py-2 px-4 border-b border-emerald-700/40 relative z-30 transition-all">
+    <div className="hidden sm:block bg-gradient-to-r from-forest-950 via-forest-900 to-emerald-950 text-white text-xs sm:text-sm py-2 px-4 border-b border-emerald-700/40 relative z-30 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 mx-auto sm:mx-0">
           <Sparkles className="w-4 h-4 text-brandPink-300 shrink-0" />

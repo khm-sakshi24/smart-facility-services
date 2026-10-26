@@ -432,10 +432,10 @@ export const SmartAssistant: React.FC = () => {
   return (
     <>
       {/* Floating Smart Assistant Launcher Button */}
-      <div className="fixed bottom-16 sm:bottom-6 right-3 sm:right-6 z-40">
+      <div className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 z-40">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group border-2 border-emerald-400/40 cursor-pointer"
+          className="flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white p-2.5 sm:px-4 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group border-2 border-emerald-400/40 cursor-pointer active:scale-95"
           aria-label="Open Smart Facility Assistant Chat"
           title="Open Smart Facility Assistant"
         >
@@ -451,8 +451,8 @@ export const SmartAssistant: React.FC = () => {
           <span className="font-bold text-xs sm:text-sm tracking-wide hidden sm:inline">
             Smart Facility Assistant
           </span>
-          <span className="font-bold text-xs sm:hidden">
-            Assistant
+          <span className="font-bold text-[11px] sm:hidden">
+            Ask AI
           </span>
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
@@ -464,7 +464,7 @@ export const SmartAssistant: React.FC = () => {
       {/* Chat Window Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-24 sm:bottom-20 right-2 sm:right-6 w-[94vw] sm:w-[410px] h-[580px] max-h-[82vh] bg-white rounded-3xl shadow-2xl border border-emerald-200 z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
+          className="fixed bottom-20 sm:bottom-20 right-2 sm:right-6 w-[95vw] sm:w-[410px] h-[78vh] sm:h-[580px] max-h-[82vh] bg-white rounded-3xl shadow-2xl border border-emerald-200 z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
           role="dialog"
           aria-label="Smart Facility Assistant Chatbot"
         >

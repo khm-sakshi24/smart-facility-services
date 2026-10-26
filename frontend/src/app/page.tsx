@@ -13,6 +13,8 @@ import { CustomerReviewSection } from "@/components/CustomerReviewSection";
 import { UrgentSupportBanner } from "@/components/UrgentSupportBanner";
 import { RequirementBuilder } from "@/components/RequirementBuilder";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { InteractiveMapSection } from "@/components/InteractiveMapSection";
+import { LocationMapModal } from "@/components/LocationMapModal";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -31,6 +33,8 @@ import {
   Layers,
   Building2,
   Check,
+  ExternalLink,
+  Navigation,
 } from "lucide-react";
 
 const categories = [
@@ -44,6 +48,7 @@ const categories = [
 export default function HomePage() {
   const { t } = useLanguage();
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("All Services");
 
   const filteredServices = useMemo(() => {
@@ -88,15 +93,15 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-28 pb-16">
-      {/* 1. Hero Section with Actual Company Logo & Direct Contact CTAs */}
-      <section className="relative pt-8 sm:pt-16 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-emerald-50/70 via-white to-white">
+    <div className="space-y-14 sm:space-y-24 pb-20">
+      {/* 1. Mobile-Optimized Hero Section with Clean Spacing & Clickable Location Badges */}
+      <section className="relative pt-6 sm:pt-16 pb-12 sm:pb-20 overflow-hidden bg-gradient-to-b from-emerald-50/70 via-white to-white">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[340px] bg-emerald-200/25 blur-3xl rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            {/* Company Logo Badge */}
-            <div className="flex justify-center">
+          <div className="max-w-3xl mx-auto text-center space-y-5 sm:space-y-6">
+            {/* Desktop-Only Company Logo Badge (Hidden on mobile to save vertical space) */}
+            <div className="hidden sm:flex justify-center mb-2">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-xl border-4 border-emerald-600/30 p-1 hover:scale-105 transition-transform duration-300">
                 <Image
                   src="/images/logo.png"
@@ -111,70 +116,112 @@ export default function HomePage() {
 
             {/* Tagline & 24/7 Timings Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900 text-white text-xs font-semibold shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-brandPink-400 animate-pulse"></span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-forest-900 text-white text-xs font-semibold shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-brandPink-400 animate-pulse"></span>
                 <span>{businessInfo.tagline}</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
                 <Clock className="w-3.5 h-3.5 text-emerald-700" />
                 <span>24/7 Support Available</span>
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-forest-950 tracking-tight leading-[1.18] sm:leading-[1.15]">
+            <h1 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-forest-950 tracking-tight leading-[1.2] sm:leading-[1.15]">
               {businessInfo.heroHeadline}
             </h1>
 
             {/* Supporting Text */}
-            <p className="text-sm sm:text-lg text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto px-2">
+            <p className="text-xs sm:text-base text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto px-1">
               {businessInfo.heroSubheadline}
             </p>
 
-            {/* Direct Action Buttons: Call Us, WhatsApp Us, Explore Services */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-2">
-              <a
-                href={getPhoneLink()}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 border border-emerald-700/60 group"
-              >
-                <Phone className="w-4 h-4 text-emerald-300 group-hover:scale-110 transition-transform" />
-                <span>Call Us ({businessInfo.primaryPhoneDisplay})</span>
-              </a>
-
-              <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
-              >
-                <MessageCircle className="w-5 h-5 text-white" />
-                <span>WhatsApp Us</span>
-              </a>
-
-              <Link
-                href="/services"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-gray-50 text-forest-950 font-bold text-sm sm:text-base border border-gray-300 shadow-2xs hover:border-forest-600 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-1.5"
-              >
-                <span>Explore 13 Services</span>
-                <ArrowRight className="w-4 h-4 text-forest-700" />
-              </Link>
+            {/* Touch-Friendly Location Badges with Live Map Action */}
+            <div className="pt-1 space-y-1.5">
+              <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider hidden sm:inline mr-1">
+                  Active Zones:
+                </span>
+                {["Hoodi", "Garudachar Palya", "Whitefield", "Bengaluru"].map((loc) => (
+                  <button
+                    key={loc}
+                    type="button"
+                    onClick={() => setSelectedLocation(loc)}
+                    className="inline-flex items-center gap-1 text-forest-900 bg-white hover:bg-emerald-50 active:scale-95 px-2.5 py-1 rounded-lg border border-emerald-200/90 text-xs font-bold shadow-2xs transition-all hover:border-emerald-500 group"
+                    title={`Touch to view ${loc} on live map`}
+                  >
+                    <MapPin className="w-3.5 h-3.5 text-emerald-600 group-hover:text-emerald-700 animate-bounce-subtle" />
+                    <span>{loc}</span>
+                  </button>
+                ))}
+              </div>
+              <p className="text-[11px] text-emerald-700 font-medium">
+                📍 Touch any location above to view on interactive map &amp; dispatch times
+              </p>
             </div>
 
-            {/* Confirmed Service Locations Quick Badges */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-2.5 text-xs font-medium text-gray-600 px-2">
-              <span className="text-gray-400">Core Hubs:</span>
-              <span className="inline-flex items-center gap-1 text-forest-900 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Hoodi
-              </span>
-              <span className="inline-flex items-center gap-1 text-forest-900 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Garudachar Palya
-              </span>
-              <span className="inline-flex items-center gap-1 text-forest-900 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Whitefield
-              </span>
-              <span className="inline-flex items-center gap-1 text-forest-900 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Bengaluru
-              </span>
+            {/* Mobile-Optimized Action Buttons (Grid on mobile, flex on desktop) */}
+            <div className="pt-2">
+              {/* Mobile 2-column layout */}
+              <div className="sm:hidden grid grid-cols-2 gap-2.5 max-w-xs mx-auto">
+                <a
+                  href={getPhoneLink()}
+                  className="py-3 px-3 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1.5 border border-emerald-700/60"
+                >
+                  <Phone className="w-3.5 h-3.5 text-emerald-300" />
+                  <span>Call Us</span>
+                </a>
+
+                <a
+                  href={getWhatsAppLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1.5"
+                >
+                  <MessageCircle className="w-4 h-4 text-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
+
+              {/* Mobile Explore Services Link */}
+              <div className="sm:hidden pt-2.5">
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center gap-1 text-xs font-bold text-forest-800 hover:text-emerald-700 underline underline-offset-4 py-1"
+                >
+                  <span>Explore All 13 Services</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              {/* Desktop 3-Button Row */}
+              <div className="hidden sm:flex items-center justify-center gap-3.5">
+                <a
+                  href={getPhoneLink()}
+                  className="px-7 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 border border-emerald-700/60 group"
+                >
+                  <Phone className="w-4 h-4 text-emerald-300 group-hover:scale-110 transition-transform" />
+                  <span>Call Us ({businessInfo.primaryPhoneDisplay})</span>
+                </a>
+
+                <a
+                  href={getWhatsAppLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5 text-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+
+                <Link
+                  href="/services"
+                  className="px-6 py-3.5 rounded-xl bg-white hover:bg-gray-50 text-forest-950 font-bold text-sm sm:text-base border border-gray-300 shadow-2xs hover:border-forest-600 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <span>Explore 13 Services</span>
+                  <ArrowRight className="w-4 h-4 text-forest-700" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -282,7 +329,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Comprehensive Location Coverage & Landmarks Details */}
+      {/* 6. Interactive Live Location & Technology Map Section */}
+      <InteractiveMapSection
+        onOpenLocationModal={(loc) => setSelectedLocation(loc)}
+      />
+
+      {/* 7. Comprehensive Location Coverage & Landmarks Details */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
@@ -292,7 +344,7 @@ export default function HomePage() {
             Confirmed Service Areas &amp; Corridors
           </h2>
           <p className="text-xs sm:text-sm text-gray-600">
-            Dedicated mobile response and routine team deployments across East Bengaluru.
+            Touch any locality card to open its interactive map and verified dispatch times.
           </p>
         </div>
 
@@ -300,14 +352,33 @@ export default function HomePage() {
           {businessInfo.confirmedServiceAreas.map((area, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl p-6 border border-gray-200 shadow-xs flex flex-col justify-between space-y-4 hover:border-emerald-500 hover:shadow-md transition-all"
+              className="bg-white rounded-2xl p-6 border border-gray-200 shadow-xs flex flex-col justify-between space-y-4 hover:border-emerald-500 hover:shadow-md transition-all group"
             >
               <div className="space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-forest-800 text-emerald-300 flex items-center justify-center font-bold">
-                  <MapPin className="w-5 h-5" />
+                <div className="flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLocation(area.neighborhood)}
+                    className="w-10 h-10 rounded-xl bg-forest-800 text-emerald-300 flex items-center justify-center font-bold hover:bg-forest-900 hover:scale-105 active:scale-95 transition-all shadow-xs"
+                    title="Touch to show on map"
+                  >
+                    <MapPin className="w-5 h-5 text-emerald-300" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLocation(area.neighborhood)}
+                    className="text-[11px] font-bold text-forest-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1 transition-colors"
+                  >
+                    <span>View Map</span>
+                    <ExternalLink className="w-3 h-3 text-emerald-600" />
+                  </button>
                 </div>
+
                 <div>
-                  <h3 className="font-bold text-lg text-forest-950">
+                  <h3
+                    onClick={() => setSelectedLocation(area.neighborhood)}
+                    className="font-bold text-lg text-forest-950 cursor-pointer hover:text-emerald-700 transition-colors"
+                  >
                     {area.neighborhood}
                   </h3>
                   <span className="text-xs text-emerald-700 font-medium block">
@@ -337,15 +408,28 @@ export default function HomePage() {
                 )}
               </div>
 
-              <a
-                href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about services in ${area.neighborhood}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-forest-950 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors border border-emerald-200"
-              >
-                <span>Inquire for {area.neighborhood}</span>
-                <span>&rarr;</span>
-              </a>
+              <div className="pt-2 space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedLocation(area.neighborhood)}
+                  className="w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-forest-900 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors border border-emerald-200"
+                >
+                  <Navigation className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Show Map &amp; Tech Details</span>
+                </button>
+
+                <a
+                  href={getWhatsAppLink(
+                    `Hello Smart Facility Services, I would like to inquire about services in ${area.neighborhood}.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+                  <span>WhatsApp Enquiry</span>
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -354,7 +438,7 @@ export default function HomePage() {
         <ServiceAreaChecker />
       </section>
 
-      {/* 7. Why Choose Us Section */}
+      {/* 8. Why Choose Us Section */}
       <section className="bg-slate-50 py-14 sm:py-20 border-y border-gray-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -386,7 +470,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Our Work Process (5 Steps) */}
+      {/* 9. Our Work Process (5 Steps) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
@@ -400,25 +484,27 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {workProcessSteps.map((step) => {
-            const IconComp = step.icon;
+            const Icon = step.icon;
             return (
               <div
                 key={step.num}
-                className="bg-white p-6 rounded-2xl border border-gray-200/90 shadow-2xs space-y-3 text-center sm:text-left flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition-all"
+                className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs space-y-3 flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-black text-forest-900 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                    STEP {step.num}
-                  </span>
-                  <div className="w-8 h-8 rounded-lg bg-forest-50 text-forest-800 flex items-center justify-center">
-                    <IconComp className="w-4 h-4" />
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="w-8 h-8 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center">
+                      {step.num}
+                    </span>
+                    <Icon className="w-5 h-5 text-forest-700" />
                   </div>
-                </div>
-                <div>
-                  <h3 className="font-bold text-sm text-gray-900 mb-1">{step.title}</h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
+                  <h3 className="font-bold text-sm text-gray-900 leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
             );
@@ -426,57 +512,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. AI Service Assistant Feature Spotlight */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-emerald-900 via-forest-900 to-forest-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-emerald-700/50 flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-4 max-w-xl text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold">
-              <Bot className="w-4 h-4" />
-              <span>Smart Facility Assistant</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Have Questions About Our Services?
-            </h2>
-            <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed font-normal">
-              Ask our virtual assistant about General Maintenance, STP/WTP operations, swimming pool upkeep, plumbing, or service coverage. You will receive verified answers and direct WhatsApp/Phone options immediately.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-2 justify-center lg:justify-start">
-              <span className="text-[11px] bg-white/10 px-3 py-1 rounded-full text-emerald-200">
-                • General Maintenance
-              </span>
-              <span className="text-[11px] bg-white/10 px-3 py-1 rounded-full text-emerald-200">
-                • Sewage Tank Cleaning
-              </span>
-              <span className="text-[11px] bg-white/10 px-3 py-1 rounded-full text-emerald-200">
-                • Swimming Pool Upkeep
-              </span>
-            </div>
-          </div>
-
-          <div className="text-center shrink-0 w-full lg:w-auto">
-            <p className="text-xs text-emerald-200 mb-3">
-              Look for the floating button at bottom right
-            </p>
-            <a
-              href={getWhatsAppLink("Hello Smart Facility Services, I would like to ask a question about your facility services.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-950 font-bold text-sm shadow hover:bg-emerald-50 transition-colors w-full sm:w-auto"
-            >
-              <MessageCircle className="w-4 h-4 text-emerald-600" />
-              <span>Ask on WhatsApp Directly</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* 10. Frequently Asked Questions Accordion */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="text-center space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            Clear Answers
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-600">
+            Everything you need to know about Smart Facility Services routines, service scopes, and operational contracts.
+          </p>
+        </div>
+
         <FaqAccordion />
       </section>
 
-      {/* 11. Genuine Customer Reviews Section */}
-      <section id="reviews" className="scroll-mt-24">
+      {/* 11. Customer Feedback & Review Rating Section */}
+      <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <CustomerReviewSection />
       </section>
 
@@ -535,6 +589,12 @@ export default function HomePage() {
       <ServiceDetailModal
         service={selectedService}
         onClose={() => setSelectedService(null)}
+      />
+
+      {/* Location Map Modal (Opens when touching any location chip or button) */}
+      <LocationMapModal
+        locationName={selectedLocation}
+        onClose={() => setSelectedLocation(null)}
       />
     </div>
   );
