@@ -121,10 +121,10 @@ export const ServiceAreaChecker: React.FC = () => {
             <h4 className="font-bold text-base text-white mb-1">{result.title}</h4>
             <p className="text-xs text-gray-200 leading-relaxed mb-4">{result.message}</p>
             <Link
-              href={`/quote?location=${encodeURIComponent(query)}`}
+              href={`/contact?location=${encodeURIComponent(query)}`}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-300 hover:text-white underline underline-offset-4"
             >
-              <span>Proceed to Request a Quote for this location</span>
+              <span>Contact Us to Discuss Services for this Location</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

@@ -1,27 +1,16 @@
-import React from "react";
-import type { Metadata } from "next";
-import { servicesCatalogue } from "@/config/servicesData";
+"use client";
+
+import React, { useState } from "react";
+import { servicesCatalogue, ServiceDetail } from "@/config/servicesData";
 import { ServiceCard } from "@/components/ServiceCard";
+import { ServiceDetailModal } from "@/components/ServiceDetailModal";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
-
-export const metadata: Metadata = {
-  title: "Facility Services Catalogue | Smart Facility Services Bengaluru",
-  description:
-    "Explore our complete facility management catalogue: Housekeeping, Electrical, Plumbing, HVAC, STP/WTP Maintenance, Swimming Pool care, and Sewage Tank Cleaning in Whitefield, Hoodi & Bengaluru.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { Phone, MessageCircle } from "lucide-react";
 
 export default function ServicesPage() {
-  const categories = [
-    "All",
-    "Core Facility Operations",
-    "Technical & Electrical",
-    "Water & Environmental",
-    "Specialized Maintenance",
-  ] as const;
+  const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
@@ -44,22 +33,51 @@ export default function ServicesPage() {
           Facility Services Catalogue
         </h1>
         <p className="text-base text-gray-700 leading-relaxed">
-          Comprehensive operations, preventive maintenance, and plant machinery care tailored for apartment associations, residential societies, and commercial properties across Bengaluru.
+          Smart Facility Services provides maintenance solutions for residential communities, apartment complexes, commercial buildings, and offices in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.
         </p>
-        <div className="p-3.5 rounded-xl bg-slate-50 border border-gray-200 text-xs text-gray-600 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span>
-            <strong>Transparency Notice:</strong> Services marked <em>Active</em> are currently available for immediate site assessment. Services marked <em>Proposed</em> are subject to business confirmation or statutory licensing readiness.
-          </span>
+
+        {/* Quick Contact Bar */}
+        <div className="p-4 rounded-2xl bg-forest-50 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs text-gray-700 text-center sm:text-left">
+            Have questions about any service? Speak directly with <strong>{businessInfo.contactPerson}</strong>.
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href={getPhoneLink()}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-semibold text-xs shadow-xs transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>Call {businessInfo.primaryPhoneDisplay}</span>
+            </a>
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-xs transition-colors"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Services Grid (All 13 Services) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {servicesCatalogue.map((service) => (
-          <ServiceCard key={service.slug} service={service} />
+          <ServiceCard
+            key={service.slug}
+            service={service}
+            onOpenModal={(svc) => setSelectedService(svc)}
+          />
         ))}
       </div>
+
+      {/* Service Detail Modal */}
+      <ServiceDetailModal
+        service={selectedService}
+        onClose={() => setSelectedService(null)}
+      />
     </div>
   );
 }

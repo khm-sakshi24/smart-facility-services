@@ -4,21 +4,25 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
 import {
-  ClipboardList,
+  businessInfo,
+  getPhoneLink,
+  getWhatsAppLink,
+} from "@/config/businessInfo";
+import {
+  Phone,
+  MessageSquare,
   Search,
-  Building2,
-  FileSpreadsheet,
   CalendarCheck,
+  CheckCircle2,
   Wrench,
-  CheckCheck,
   ArrowRight,
-  Info,
+  MessageCircle,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Our Work Process | Smart Facility Services",
   description:
-    "Explore our proposed 7-stage facility management workflow, from initial enquiry and site inspection to quotation, execution, and quality follow-up.",
+    "Explore our straightforward 5-step facility management work process: from initial contact and requirement discussion to site inspection, clear terms, and execution.",
   alternates: {
     canonical: "/process",
   },
@@ -28,52 +32,38 @@ export default function ProcessPage() {
   const steps = [
     {
       num: "01",
-      title: "Customer Submits an Enquiry",
-      desc: "An apartment association member, property manager, or commercial owner submits basic requirements, property location, and desired services through our quotation form.",
-      icon: ClipboardList,
-      deliverable: "Digital enquiry reference generated and stored securely.",
+      title: "Contact Smart Facility Services",
+      desc: "Reach out via phone call, WhatsApp, or email. Speak directly with Aruna to share your initial property maintenance inquiry.",
+      icon: Phone,
+      deliverable: "Immediate direct communication with our operations coordinator.",
     },
     {
       num: "02",
-      title: "Team Reviews Requirements",
-      desc: "Our operations coordinator reviews the building type, unit count, and technical scope to confirm operational feasibility and prepare initial technical questions.",
-      icon: Search,
-      deliverable: "Preliminary operational assessment and checklist.",
+      title: "Explain Property Requirements",
+      desc: "Share your residential society or commercial facility details, unit count, common area facilities, and specific pain points.",
+      icon: MessageSquare,
+      deliverable: "Clear property scope definition and service catalog matching.",
     },
     {
       num: "03",
-      title: "Site Inspection Arranged",
-      desc: "If required, an experienced technical supervisor visits the property to inspect pump rooms, water treatment plants, electrical boards, and common area layouts.",
-      icon: Building2,
-      deliverable: "Physical asset condition audit and scope documentation.",
+      title: "Arrange Site Inspection",
+      desc: "When needed, an experienced operational supervisor visits your property to inspect pump rooms, water treatment tanks, electrical panels, or common grounds.",
+      icon: Search,
+      deliverable: "On-site condition evaluation and technical review.",
     },
     {
       num: "04",
-      title: "Quotation is Prepared",
-      desc: "A transparent commercial proposal is generated with clear itemized scope, technician allocations, consumable options, and commercial terms.",
-      icon: FileSpreadsheet,
-      deliverable: "Formal quotation document for management committee review.",
+      title: "Discuss Scope & Terms",
+      desc: "We discuss transparent, realistic service terms and tailored schedules directly with your managing committee or property team.",
+      icon: CalendarCheck,
+      deliverable: "Agreed operational roadmap and transparent scope terms.",
     },
     {
       num: "05",
-      title: "Work is Scheduled After Approval",
-      desc: "Once the association or property owner approves the proposal, work orders are scheduled, staff are assigned, and site mobilization dates are locked in.",
-      icon: CalendarCheck,
-      deliverable: "Approved work order with dedicated team allocation.",
-    },
-    {
-      num: "06",
-      title: "Work is Completed & Documented",
-      desc: "Maintenance and daily operations are carried out according to agreed checklists, with on-site logbooks and digital completion notes recorded.",
+      title: "Begin Work",
+      desc: "Operations commence promptly once terms are confirmed, deploying trained technicians and maintaining consistent daily maintenance standards.",
       icon: Wrench,
-      deliverable: "Daily log entries, maintenance reports, and handover notes.",
-    },
-    {
-      num: "07",
-      title: "Follow-Up is Recorded",
-      desc: "Routine follow-up reviews are conducted with association representatives to evaluate service satisfaction and address any adjustments.",
-      icon: CheckCheck,
-      deliverable: "Continuous quality records and periodic review sign-offs.",
+      deliverable: "Regular execution, on-ground supervision, and reliable daily support.",
     },
   ];
 
@@ -82,8 +72,8 @@ export default function ProcessPage() {
       <StructuredData
         type="BreadcrumbList"
         breadcrumbs={[
-          { name: "Home", item: "https://smartfacilityservices.com" },
-          { name: "Our Work Process", item: "https://smartfacilityservices.com/process" },
+          { name: "Home", item: businessInfo.siteUrl },
+          { name: "Work Process", item: `${businessInfo.siteUrl}/process` },
         ]}
       />
 
@@ -92,39 +82,32 @@ export default function ProcessPage() {
       {/* Header */}
       <div className="max-w-3xl space-y-4">
         <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-          Proposed Operational Framework
+          Straightforward &amp; Transparent
         </span>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
-          Our Work Process
+          How We Work With You
         </h1>
         <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-          We maintain quality through a disciplined, predictable operational workflow designed specifically for residential communities and commercial properties.
+          A simple, transparent process creates confidence. Here is how Smart Facility Services partners with apartment associations and commercial facilities from the first call to daily operations.
         </p>
-
-        <div className="p-4 rounded-xl bg-amber-50/90 border border-amber-200/80 text-xs sm:text-sm text-amber-950 flex items-start gap-3">
-          <Info className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-          <div>
-            <strong>Process Clarification:</strong> This 7-stage workflow represents our proposed operational standard. Specific timelines, inspection protocols, and review schedules are mutually adapted based on association agreements and individual property requirements.
-          </div>
-        </div>
       </div>
 
-      {/* 7-Step Vertical Timeline */}
+      {/* 5-Step Process Timeline */}
       <div className="space-y-6">
         {steps.map((step, idx) => {
           const IconC = step.icon;
           return (
             <div
-              key={step.num}
-              className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200/90 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+              key={idx}
+              className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-emerald-300 transition-all"
             >
               <div className="flex items-start gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-forest-50 border border-forest-100 text-forest-800 flex items-center justify-center font-black text-xl shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-forest-800 text-emerald-300 flex items-center justify-center font-black text-xl shrink-0 shadow-xs">
                   {step.num}
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <IconC className="w-4 h-4 text-emerald-600" />
+                    <IconC className="w-5 h-5 text-emerald-600" />
                     <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                       {step.title}
                     </h2>
@@ -140,8 +123,8 @@ export default function ProcessPage() {
               </div>
 
               <div className="shrink-0 self-start md:self-center">
-                <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">
-                  Stage {idx + 1} of 7
+                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg">
+                  Step {idx + 1} of 5
                 </span>
               </div>
             </div>
@@ -150,21 +133,30 @@ export default function ProcessPage() {
       </div>
 
       {/* CTA Box */}
-      <div className="bg-forest-900 text-white p-8 sm:p-12 rounded-3xl text-center space-y-4 border border-emerald-800">
+      <div className="bg-forest-900 text-white p-8 sm:p-12 rounded-3xl text-center space-y-5 border border-emerald-800">
         <h3 className="text-2xl sm:text-3xl font-extrabold">
-          Ready to Start Stage 01?
+          Ready to Start Step 1?
         </h3>
-        <p className="text-sm text-emerald-100 max-w-xl mx-auto">
-          Submit your property requirements to initiate a technical review and arrange a site inspection.
+        <p className="text-sm text-emerald-100 max-w-xl mx-auto leading-relaxed">
+          Contact Aruna directly by phone or WhatsApp to discuss your property maintenance needs today.
         </p>
-        <div className="pt-2">
-          <Link
-            href="/quote"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-forest-950 font-bold text-sm shadow hover:bg-gray-100 transition-colors"
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a
+            href={getPhoneLink()}
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white text-forest-950 font-bold text-sm shadow hover:bg-gray-100 transition-colors w-full sm:w-auto"
           >
-            <span>Submit Your Enquiry</span>
-            <ArrowRight className="w-4 h-4 text-forest-800" />
-          </Link>
+            <Phone className="w-4 h-4 text-forest-800" />
+            <span>Call Now: {businessInfo.contact.phoneFormatted}</span>
+          </a>
+          <a
+            href={getWhatsAppLink("Hello Aruna, I would like to discuss Step 1 of your facility services work process.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-sm shadow transition-colors w-full sm:w-auto"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>WhatsApp Us</span>
+          </a>
         </div>
       </div>
     </div>

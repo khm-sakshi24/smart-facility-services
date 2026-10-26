@@ -2,12 +2,12 @@ export interface ServiceDetail {
   slug: string;
   title: string;
   category: "Core Facility Operations" | "Technical & Electrical" | "Water & Environmental" | "Specialized Maintenance";
-  status: "confirmed" | "proposed";
+  status: "active" | "proposed";
   iconName: string;
   shortDescription: string;
   fullDescription: string;
   typicalUseCases: string[];
-  scopeOfWork: string[]; // marked illustrative if not confirmed
+  scopeOfWork: string[];
   benefits: string[];
   complianceNotes?: string;
   faqs: { question: string; answer: string }[];
@@ -15,31 +15,31 @@ export interface ServiceDetail {
 
 export const servicesCatalogue: ServiceDetail[] = [
   {
-    slug: "housekeeping-services",
-    title: "Housekeeping Services",
+    slug: "housekeeping-cleaning-services",
+    title: "Housekeeping and Cleaning Services",
     category: "Core Facility Operations",
-    status: "confirmed",
+    status: "active",
     iconName: "Sparkles",
-    shortDescription: "Systematic cleaning, sanitation, and hygiene upkeep for residential common areas, clubhouses, and corporate premises.",
-    fullDescription: "Our housekeeping management delivers structured cleaning protocols tailored for residential communities, apartment associations, and commercial properties. We focus on common area hygiene, lobby maintenance, stairwells, basements, and waste management segregation support.",
+    shortDescription: "Systematic cleaning, sanitation, and hygiene upkeep for residential corridors, clubhouses, common washrooms, and corporate premises.",
+    fullDescription: "Our housekeeping management delivers structured cleaning protocols tailored for residential communities, apartment associations, and commercial properties. We focus on common area hygiene, lobby maintenance, stairwells, basements, and waste segregation support.",
     typicalUseCases: [
       "Residential apartment lobbies, corridors, and clubhouses",
-      "Corporate office towers and tech park common facilities",
+      "Corporate office common areas and commercial buildings",
       "Gated community recreational amenities and gymnasiums",
-      "Basement parking and outdoor paved pathways"
+      "Basement parking and paved community walkways"
     ],
     scopeOfWork: [
       "Daily sweeping, damp mopping, and vacuuming of designated common corridors",
       "Sanitization of lift cabins, handrails, door handles, and high-touch points",
       "Deep cleaning of common restrooms, washrooms, and community halls",
-      "Trash clearance and designated dry/wet garbage segregation support",
+      "Common trash clearance and designated dry/wet garbage handling",
       "Glass pane cleaning and window washing up to accessible heights"
     ],
     benefits: [
       "Consistent property presentation and improved resident hygiene",
-      "Standardized checklists and daily supervisor log reviews",
+      "Standardized daily checklists and supervisor log reviews",
       "Use of eco-friendly, non-hazardous cleaning materials",
-      "Trained staff adhering to site safety and decorum standards"
+      "Trained and disciplined on-site cleaning staff"
     ],
     faqs: [
       {
@@ -47,7 +47,7 @@ export const servicesCatalogue: ServiceDetail[] = [
         answer: "Schedules are configured based on community footfall and association preferences, typically operating daily morning shifts with dedicated supervisory oversight."
       },
       {
-        question: "Are cleaning chemicals and consumables included?",
+        question: "Are cleaning consumables included?",
         answer: "We offer both consumable-inclusive contracts and labor-only operational models depending on the property's procurement guidelines."
       }
     ]
@@ -56,10 +56,10 @@ export const servicesCatalogue: ServiceDetail[] = [
     slug: "electrical-maintenance",
     title: "Electrical Maintenance",
     category: "Technical & Electrical",
-    status: "confirmed",
+    status: "active",
     iconName: "Zap",
     shortDescription: "Preventive and breakdown maintenance for power distribution boards, backup generators, lighting, and electrical panels.",
-    fullDescription: "Reliable electrical operations are vital for safety and uninterrupted property life. We provide scheduled inspections, load monitoring, panel servicing, and rapid troubleshooting for common area electrical installations.",
+    fullDescription: "Reliable electrical operations are vital for property safety and continuous power. We provide scheduled inspections, load monitoring, panel servicing, and rapid troubleshooting for common area electrical installations.",
     typicalUseCases: [
       "Apartment association power backup (DG set) changeovers and panel boards",
       "Common area lighting circuits, timers, and surge protectors",
@@ -75,9 +75,9 @@ export const servicesCatalogue: ServiceDetail[] = [
     ],
     benefits: [
       "Minimizes unexpected power outages and critical equipment downtime",
-      "Reduces electrical fire hazards through thermal and visual inspection",
+      "Reduces electrical fire hazards through visual and thermal inspection",
       "Maintains compliant logs for electrical audits and insurance records",
-      "Skilled technicians adhering to safety isolations and lockout protocols"
+      "Skilled technicians adhering to strict safety protocols"
     ],
     faqs: [
       {
@@ -90,7 +90,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     slug: "plumbing-services",
     title: "Plumbing Services",
     category: "Technical & Electrical",
-    status: "confirmed",
+    status: "active",
     iconName: "Wrench",
     shortDescription: "Comprehensive maintenance of water supply networks, hydro-pneumatic pumping systems, valves, and drainage piping.",
     fullDescription: "Smart Facility Services ensures seamless water distribution and wastewater discharge across residential towers and commercial establishments. We manage pump rooms, pressure tanks, header lines, and drainage sumps.",
@@ -108,7 +108,7 @@ export const servicesCatalogue: ServiceDetail[] = [
       "Water level monitoring and automatic controller calibration"
     ],
     benefits: [
-      "Prevents water shortages and catastrophic basement flooding incidents",
+      "Prevents water shortages and basement flooding incidents",
       "Extends pump motor lifespan through vibration and alignment monitoring",
       "Conserves water by identifying hidden pipe seepage early",
       "Systematic maintenance logs for society facility committees"
@@ -121,12 +121,12 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "hvac-maintenance",
-    title: "HVAC Maintenance",
+    slug: "hvac-air-conditioning-maintenance",
+    title: "HVAC and Air-Conditioning Maintenance",
     category: "Technical & Electrical",
-    status: "confirmed",
+    status: "active",
     iconName: "Fan",
-    shortDescription: "Operation, filter servicing, and seasonal maintenance for ventilation systems, VRF units, and chillers.",
+    shortDescription: "Operation, filter servicing, and seasonal maintenance for ventilation systems, VRF units, split ACs, and chillers.",
     fullDescription: "From basement ventilation exhaust fans to VRF air conditioning in clubhouses and commercial floors, we provide systematic maintenance to maintain air circulation, thermal comfort, and energy efficiency.",
     typicalUseCases: [
       "Commercial office VRF / VRV heating and cooling units",
@@ -144,7 +144,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     benefits: [
       "Optimal indoor air quality and temperature consistency",
       "Reduced electricity consumption from clogged coils and dirty filters",
-      "Compliance with local building ventilation and fire safety standards"
+      "Compliance with local building ventilation standards"
     ],
     faqs: [
       {
@@ -159,7 +159,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     category: "Core Facility Operations",
     status: "proposed",
     iconName: "Shield",
-    shortDescription: "Gated entry management, visitor validation, perimeter surveillance, and parking management.",
+    shortDescription: "Gated entry management, visitor validation, perimeter surveillance, and parking regulation.",
     fullDescription: "Security is foundational to peace of mind. We propose regulated security staffing tailored to apartment societies and commercial buildings, featuring structured visitor validation, perimeter rounds, and emergency response.",
     typicalUseCases: [
       "Main gate boom barrier and visitor log management",
@@ -172,50 +172,85 @@ export const servicesCatalogue: ServiceDetail[] = [
       "Scheduled perimeter patrols with night watch verification points",
       "Material inward/outward gate pass monitoring",
       "Traffic regulation in driveways and drop-off points",
-      "First-response coordination during medical or fire emergencies"
+      "First-response coordination during emergencies"
     ],
     benefits: [
       "Controlled property access and prevention of unauthorized entry",
       "Well-disciplined, verified, and groomed security personnel",
       "Strict enforcement of community safety bylaws"
     ],
-    complianceNotes: "Regulatory Notice: Security staffing services are subject to the Private Security Agencies (Regulation) Act (PSARA). Operational deployment occurs only upon complete regulatory licensing and statutory compliance confirmation.",
+    complianceNotes: "Regulatory Notice: Security staffing services are subject to the Private Security Agencies (Regulation) Act (PSARA). Operational deployment occurs only upon complete regulatory licensing confirmation.",
     faqs: [
       {
         question: "Is security staffing currently active?",
-        answer: "This service is in the proposed catalogue and is made available strictly in compliance with applicable state PSARA regulations."
+        answer: "This service is in the proposed catalogue and is arranged strictly in compliance with applicable state PSARA regulations."
       }
     ]
   },
   {
-    slug: "general-maintenance",
+    slug: "general-building-maintenance",
     title: "General Maintenance",
     category: "Core Facility Operations",
-    status: "confirmed",
+    status: "active",
     iconName: "Hammer",
-    shortDescription: "On-site multi-skilled handy support for carpentry, masonry touch-ups, painting, and fixture repairs.",
-    fullDescription: "Properties require ongoing minor repairs to keep infrastructure safe and visually appealing. Our general maintenance technicians attend to door hinges, tile repairs, signage, locks, and plastering touch-ups.",
+    shortDescription: "On-site multi-skilled handyman support for carpentry, masonry touch-ups, door hardware, tile fixes, and general property upkeep.",
+    fullDescription: "Properties require ongoing minor repairs to keep infrastructure safe and visually appealing. Our general building maintenance support attends to door hinges, tile repairs, signage, locks, and plastering touch-ups across common property areas.",
     typicalUseCases: [
       "Apartment association common walkways, pavers, and benches",
       "Door closers, fire exit hardware, and panic bar repairs",
       "Minor masonry repairs around storm water grates and curbs",
-      "Signage installation and safety marking maintenance"
+      "Signage installation and safety marking maintenance",
+      "Routine fixture repairs and miscellaneous property upkeep"
     ],
     scopeOfWork: [
       "Repair and alignment of heavy wooden and metal doors",
       "Patch plastering and repainting of chipped perimeter walls",
       "Replacement of broken floor pavers, kerb stones, and drain covers",
-      "Installation of safety mirrors, speed bumps, and caution boards"
+      "Installation of safety mirrors, speed bumps, and caution boards",
+      "Carpentry repairs for clubhouse furniture and fittings"
     ],
     benefits: [
       "Prompt resolution of cosmetic and structural wear-and-tear",
       "Avoids costly major rebuilds by fixing minor damage early",
-      "Single-point coordination for miscellaneous repair tasks"
+      "Single point of contact for miscellaneous repair tasks"
     ],
     faqs: [
       {
         question: "Can associations request a dedicated on-site handyman?",
-        answer: "Yes, both full-time dedicated technician deployments and visit-based maintenance plans can be structured."
+        answer: "Yes, both full-time dedicated technician deployments and visit-based maintenance plans can be arranged."
+      }
+    ]
+  },
+  {
+    slug: "water-tank-cleaning",
+    title: "Water Tank Cleaning",
+    category: "Water & Environmental",
+    status: "active",
+    iconName: "Droplets",
+    shortDescription: "Mechanized, hygienic de-sludging, scrubbing, and UV disinfection for overhead tanks (OHT) and underground sumps (UGS).",
+    fullDescription: "Clean potable water is essential for resident health. Our systematic water tank cleaning service removes accumulated silt, algae, and bacterial biofilms from underground sumps and overhead tanks using pressurized de-watering, anti-bacterial scrubbing, and UV disinfection.",
+    typicalUseCases: [
+      "Residential apartment underground potable water sumps",
+      "Overhead water distribution tanks on building rooftops",
+      "Commercial building domestic water storage chambers",
+      "Clubhouse and restaurant dedicated water reservoirs"
+    ],
+    scopeOfWork: [
+      "Complete de-watering and sediment sludge extraction",
+      "High-pressure hydraulic rotary scrubbing of floor, ceiling, and walls",
+      "Vacuum suction of residual slurry and suspended particles",
+      "Application of certified non-toxic anti-bacterial disinfectant spray",
+      "Ultraviolet (UV) microbial radiation treatment prior to refilling"
+    ],
+    benefits: [
+      "Eliminates water contamination, odor, and sediment in tap lines",
+      "Certified safe for human consumption with non-hazardous agents",
+      "Accompanied by before-and-after photographic documentation"
+    ],
+    faqs: [
+      {
+        question: "How often should apartment water tanks be cleaned?",
+        answer: "Health authorities and water standards recommend cleaning domestic sumps and overhead tanks at least once every 6 months."
       }
     ]
   },
@@ -242,7 +277,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     benefits: [
       "Transparent engineering assessment independent of vendors",
       "Identifies hidden power and water wastage saving operational costs",
-      "Empowers associations with data during builder handover negotiations"
+      "Empowers associations with data during builder handover reviews"
     ],
     faqs: [
       {
@@ -255,7 +290,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     slug: "stp-etp-wtp-maintenance",
     title: "STP, ETP and WTP Operation and Maintenance",
     category: "Water & Environmental",
-    status: "confirmed",
+    status: "active",
     iconName: "Droplets",
     shortDescription: "Expert operation and compliance management for Sewage, Effluent, and Water Treatment Plants.",
     fullDescription: "Environmental compliance and water sustainability are critical for residential and commercial complexes in Bengaluru. We manage biological treatment plants (MBBR, SBR, MBR), sand/carbon filtration, and reverse osmosis units to meet KSPCB standards.",
@@ -281,7 +316,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     faqs: [
       {
         question: "Do you supply the required treatment chemicals and bio-enzymes?",
-        answer: "Yes, we can provide all consumables, bacterial cultures, and dosing chemicals under an all-inclusive O&M contract."
+        answer: "Yes, we can provide all consumables, bacterial cultures, and dosing chemicals under an all-inclusive O&M plan."
       },
       {
         question: "Can your team revive a sluggish or odor-emitting STP?",
@@ -290,10 +325,10 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "sewage-tank-cleaning",
-    title: "Sewage Tank Cleaning",
+    slug: "sewage-tank-cleaning-work",
+    title: "Sewage Tank Cleaning Work",
     category: "Water & Environmental",
-    status: "confirmed",
+    status: "active",
     iconName: "Trash2",
     shortDescription: "Mechanized de-sludging, sediment removal, and disinfection of collection sumps and septic chambers.",
     fullDescription: "Accumulated sludge, grit, and hardened fat deposits reduce sump capacity and cause severe blockages. We use mechanized vacuum pumping, high-pressure jetting, and non-entry safety equipment to clean sewage tanks safely.",
@@ -318,15 +353,15 @@ export const servicesCatalogue: ServiceDetail[] = [
     faqs: [
       {
         question: "Is human entry into sewage tanks practiced?",
-        answer: "No. In strict accordance with national safety and anti-manual-scavenging directives, we deploy mechanized vacuum suction and robotic/hydraulic jetting solutions."
+        answer: "No. In strict accordance with national safety and anti-manual-scavenging directives, we deploy mechanized vacuum suction and hydraulic jetting solutions."
       }
     ]
   },
   {
-    slug: "swimming-pool-maintenance",
-    title: "Swimming Pool Maintenance & Chemical Management",
+    slug: "swimming-pool-maintenance-chemicals",
+    title: "Swimming Pool Maintenance with Chemicals",
     category: "Specialized Maintenance",
-    status: "confirmed",
+    status: "active",
     iconName: "LifeBuoy",
     shortDescription: "Water balance testing, vacuuming, chlorination, and filtration management for sparkling clean pools.",
     fullDescription: "A hygienic pool requires precise chemistry and disciplined mechanical filtration. We manage chlorine, pH balance, alkalinity, and algicide dosing, alongside daily underwater vacuuming and skimmer basket clearing.",
@@ -350,7 +385,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     faqs: [
       {
         question: "How often is pool water chemistry tested?",
-        answer: "Our technicians conduct tests at least twice daily (morning before opening and evening after peak hours) with results recorded on site."
+        answer: "Our technicians conduct tests at least twice daily with results recorded on site."
       }
     ]
   },
@@ -382,7 +417,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     faqs: [
       {
         question: "How long does a full pool re-grouting and rework take?",
-        answer: "A standard 25m residential pool refurbishment typically requires 10 to 18 operational days depending on curing times and waterproofing requirements."
+        answer: "A standard residential pool refurbishment typically requires 10 to 18 operational days depending on curing times and waterproofing requirements."
       }
     ]
   },
@@ -410,7 +445,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     benefits: [
       "Guarantees warranty compliance through certified installation protocols",
       "Eliminates excessive vibration and premature mechanical failure",
-      "Seamless integration with existing facility automation and SCADA"
+      "Seamless integration with existing facility automation"
     ],
     faqs: [
       {

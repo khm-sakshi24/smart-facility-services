@@ -25,20 +25,21 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
       name: businessInfo.name,
       description: businessInfo.heroSubheadline,
       url: businessInfo.siteUrl,
+      telephone: `+91${businessInfo.primaryPhone}`,
+      email: businessInfo.email,
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: `+91${businessInfo.primaryPhone}`,
+        email: businessInfo.email,
+        name: businessInfo.contactPerson,
+      },
       areaServed: businessInfo.confirmedServiceAreas.map((area) => ({
         "@type": "AdministrativeArea",
         name: `${area.neighborhood}, ${area.city}, Karnataka`,
       })),
       slogan: businessInfo.tagline,
       priceRange: "$$",
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          opens: "08:00",
-          closes: "19:00",
-        },
-      ],
     };
   } else if (type === "Service" && serviceData) {
     schema = {
@@ -50,6 +51,8 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
         "@type": "LocalBusiness",
         name: businessInfo.name,
         url: businessInfo.siteUrl,
+        telephone: `+91${businessInfo.primaryPhone}`,
+        email: businessInfo.email,
       },
       areaServed: businessInfo.confirmedServiceAreas.map((area) => ({
         "@type": "AdministrativeArea",

@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "./LanguageContext";
-import { businessInfo } from "@/config/businessInfo";
-import { Menu, X, ShieldCheck, ChevronRight, Globe } from "lucide-react";
+import { businessInfo, getPhoneLink } from "@/config/businessInfo";
+import { Menu, X, ShieldCheck, Phone, Globe } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,9 +15,8 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { href: "/", label: t.nav.home },
     { href: "/services", label: t.nav.services },
-    { href: "/process", label: t.nav.process },
-    { href: "/service-areas", label: t.nav.serviceAreas },
     { href: "/about", label: t.nav.about },
+    { href: "/service-areas", label: t.nav.serviceAreas },
     { href: "/contact", label: t.nav.contact },
   ];
 
@@ -27,29 +26,30 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-sm transition-all">
-      {/* Top micro-bar with service areas and language toggle */}
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs transition-all">
+      {/* Top Micro-Bar with direct contact & language toggle */}
       <div className="bg-forest-950 text-emerald-100 text-xs py-1.5 px-4 sm:px-8 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Serving Hoodi, Garudachar Palya, Whitefield &amp; Bengaluru</span>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4">
+          <a
+            href={getPhoneLink()}
+            className="hidden sm:inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-medium"
+          >
+            <Phone className="w-3.5 h-3.5 text-emerald-400" />
+            <span>{businessInfo.primaryPhoneDisplay}</span>
+          </a>
           <button
             onClick={() => setLanguage(language === "en" ? "kn" : "en")}
-            className="flex items-center space-x-1 px-2 py-0.5 rounded bg-emerald-900/60 hover:bg-emerald-800 text-white text-xs transition-colors"
+            className="flex items-center space-x-1 px-2.5 py-0.5 rounded bg-emerald-900/70 hover:bg-emerald-800 text-white text-xs transition-colors"
             title="Toggle English / ಕನ್ನಡ"
             aria-label="Toggle Language"
           >
             <Globe className="w-3.5 h-3.5 text-brandPink-300" />
             <span className="font-medium">{language === "en" ? "ಕನ್ನಡ" : "English"}</span>
           </button>
-          <Link
-            href="/admin/login"
-            className="text-emerald-300 hover:text-white transition-colors text-xs font-medium hidden sm:inline"
-          >
-            {t.nav.adminLogin}
-          </Link>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center space-x-1.5" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -82,7 +82,7 @@ export const Navbar: React.FC = () => {
                   href={link.href}
                   className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
                     active
-                      ? "text-forest-900 bg-emerald-50 border border-emerald-200 shadow-xs"
+                      ? "text-forest-900 bg-emerald-50 border border-emerald-200 shadow-2xs font-semibold"
                       : "text-gray-700 hover:text-forest-800 hover:bg-gray-50"
                   }`}
                 >
@@ -92,14 +92,14 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Request a Quote CTA button */}
+          {/* Prominent Contact Us Button */}
           <div className="hidden sm:flex items-center space-x-3">
             <Link
-              href="/quote"
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-forest-800 hover:bg-forest-900 shadow-sm hover:shadow transition-all border border-emerald-700/50 group"
+              href="/contact"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-forest-800 hover:bg-forest-900 shadow-sm hover:shadow transition-all border border-emerald-700/50 group"
             >
-              <span>{t.nav.quote}</span>
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform text-brandPink-300" />
+              <Phone className="w-4 h-4 text-emerald-300" />
+              <span>{t.nav.contact}</span>
             </Link>
           </div>
 
@@ -140,20 +140,16 @@ export const Navbar: React.FC = () => {
           })}
           <div className="pt-3 border-t border-gray-100 space-y-2">
             <Link
-              href="/quote"
+              href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center space-x-2 px-5 py-3 rounded-lg text-base font-semibold text-white bg-forest-800 hover:bg-forest-900 shadow"
+              className="w-full flex items-center justify-center space-x-2 px-5 py-3 rounded-xl text-base font-semibold text-white bg-forest-800 hover:bg-forest-900 shadow"
             >
-              <span>{t.nav.quote}</span>
-              <ChevronRight className="w-4 h-4 text-brandPink-300" />
+              <Phone className="w-4 h-4 text-emerald-300" />
+              <span>{t.nav.contact}</span>
             </Link>
-            <Link
-              href="/admin/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center py-2 text-sm text-gray-600 hover:text-forest-800"
-            >
-              {t.nav.adminLogin}
-            </Link>
+            <div className="text-center pt-2 text-xs text-gray-600 font-medium">
+              Direct: <strong>{businessInfo.primaryPhoneDisplay}</strong> ({businessInfo.contactPerson})
+            </div>
           </div>
         </div>
       )}

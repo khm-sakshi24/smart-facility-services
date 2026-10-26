@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
-import { businessInfo } from "@/config/businessInfo";
-import { ShieldCheck, Target, Eye, CheckCircle2, ArrowRight } from "lucide-react";
+import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { Target, Eye, CheckCircle2, Phone, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us | Smart Facility Services Bengaluru",
   description:
-    "Learn about Smart Facility Services, our disciplined property care philosophy, and our commitment to dependable facility operations in Whitefield, Hoodi and Bengaluru.",
+    "Learn about Smart Facility Services, our dependable property care philosophy, and our commitment to facility management in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.",
   alternates: {
     canonical: "/about",
   },
@@ -36,8 +36,8 @@ export default function AboutPage() {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
           About Smart Facility Services
         </h1>
-        <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-          {businessInfo.heroSubheadline}
+        <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal">
+          {businessInfo.aboutIntro}
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
           </div>
           <h2 className="text-2xl font-bold text-gray-900">Our Mission</h2>
           <p className="text-sm text-gray-600 leading-relaxed">
-            To provide transparent, dependable, and systematically documented facility support that preserves property value, ensures resident safety, and lifts the administrative burden from apartment management committees and property executives.
+            To deliver transparent, dependable, and systematically executed facility support that preserves property value, maintains resident hygiene and safety, and lifts administrative burdens from property managers and apartment management committees.
           </p>
         </div>
 
@@ -59,19 +59,19 @@ export default function AboutPage() {
           </div>
           <h2 className="text-2xl font-bold text-gray-900">Property Care Philosophy</h2>
           <p className="text-sm text-gray-600 leading-relaxed">
-            We believe that prevention is vastly superior to breakdown repair. By standardizing daily logs across sewage treatment plants, pump headers, electrical boards, and common areas, we identify small anomalies before they evolve into costly disruptions.
+            We focus on preventive maintenance and clear communication. By standardizing daily routines across water treatment plants, electrical boards, pumps, and common areas, we identify issues early and maintain smooth, uninterrupted property operations.
           </p>
         </div>
       </div>
 
-      {/* Core Standards */}
+      {/* Core Principles */}
       <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-gray-200 space-y-8">
         <div className="max-w-2xl space-y-2">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            Our Commitment to Service Quality
+            Our Service Principles
           </h2>
           <p className="text-sm text-gray-600">
-            Every operational engagement is governed by transparent standards:
+            Every client relationship is guided by transparent operational standards:
           </p>
         </div>
 
@@ -79,50 +79,61 @@ export default function AboutPage() {
           <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-2">
             <div className="flex items-center gap-2 text-forest-800 font-bold text-base">
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span>Verified Site Audits</span>
+              <span>Clear Scope of Work</span>
             </div>
             <p className="text-xs text-gray-600 leading-relaxed">
-              We never pitch blind estimates. Each quotation is rooted in physical equipment inspection and agreed scope checklists.
+              Clear communication and agreed checklists so apartment associations always know what to expect.
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-2">
             <div className="flex items-center gap-2 text-forest-800 font-bold text-base">
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span>Disciplined Logbooks</span>
+              <span>Responsive Coordination</span>
             </div>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Daily pump runtime logs, chlorine levels, filter backwashes, and panel temperatures are maintained transparently for association review.
+              Quick follow-up and one point of contact for multiple building maintenance disciplines.
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-2">
             <div className="flex items-center gap-2 text-forest-800 font-bold text-base">
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span>Regulatory Diligence</span>
+              <span>Tailored Service Plans</span>
             </div>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Environmental compliance with KSPCB discharge standards and adherence to safety protocols for confined spaces and high voltage.
+              Flexible scheduling designed around your property's specific size, machinery, and requirements.
             </p>
           </div>
         </div>
       </div>
 
-      {/* CTA */}
+      {/* Direct Contact Callout */}
       <div className="bg-forest-900 text-white p-8 sm:p-12 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800">
         <div>
-          <h3 className="text-2xl font-bold">Have a property in Whitefield or Hoodi?</h3>
+          <h3 className="text-2xl font-bold">Connect With Our Team</h3>
           <p className="text-sm text-emerald-200 mt-1">
-            Let us inspect your facility and prepare a structured maintenance plan.
+            Speak directly with <strong>{businessInfo.contactPerson}</strong> at <strong>{businessInfo.primaryPhoneDisplay}</strong> to discuss your property.
           </p>
         </div>
-        <Link
-          href="/quote"
-          className="px-6 py-3 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-sm shadow shrink-0 flex items-center gap-2"
-        >
-          <span>Request a Quote</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+        <div className="flex items-center gap-3 shrink-0">
+          <a
+            href={getPhoneLink()}
+            className="px-6 py-3 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-sm shadow flex items-center gap-2 transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            <span>Call Us</span>
+          </a>
+          <a
+            href={getWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow flex items-center gap-2 transition-colors"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>WhatsApp</span>
+          </a>
+        </div>
       </div>
     </div>
   );

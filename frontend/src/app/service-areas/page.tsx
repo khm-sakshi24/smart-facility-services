@@ -4,13 +4,13 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
 import { ServiceAreaChecker } from "@/components/ServiceAreaChecker";
-import { businessInfo } from "@/config/businessInfo";
-import { MapPin, CheckCircle2, ArrowRight, Building, HelpCircle } from "lucide-react";
+import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { MapPin, CheckCircle2, Phone, MessageCircle, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Service Areas | Whitefield, Hoodi & Bengaluru Facility Support",
   description:
-    "Confirmed facility services coverage across Whitefield, Hoodi, Garudachar Palya, and greater Bengaluru. Verify coverage for your apartment association or commercial property.",
+    "Confirmed facility services coverage across Hoodi, Garudachar Palya, Whitefield, and greater Bengaluru. Direct contact with Smart Facility Services.",
   alternates: {
     canonical: "/service-areas",
   },
@@ -38,7 +38,7 @@ export default function ServiceAreasPage() {
           Service Areas in Bengaluru
         </h1>
         <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-          Smart Facility Services concentrates its daily operational response across East Bengaluru’s prime residential and tech corridors, ensuring prompt site visits and reliable technician attendance.
+          Smart Facility Services provides responsive operational maintenance support for apartments, gated communities, and commercial facilities in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export default function ServiceAreasPage() {
                 <MapPin className="w-6 h-6" />
               </div>
               <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                Confirmed Coverage
+                Active Coverage
               </span>
             </div>
 
@@ -75,15 +75,17 @@ export default function ServiceAreasPage() {
             <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
               <span className="text-xs text-forest-800 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                Dedicated site inspections available
+                Prompt site walkthroughs available
               </span>
-              <Link
-                href={`/quote?location=${encodeURIComponent(area.neighborhood)}`}
-                className="text-xs font-bold text-forest-800 hover:text-forest-950 underline flex items-center gap-1"
+              <a
+                href={getWhatsAppLink(`Hello Smart Facility Services, I have a property in ${area.neighborhood} and would like to discuss maintenance.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-emerald-700 hover:text-emerald-900 underline flex items-center gap-1"
               >
-                <span>Request Quote</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+                <span>WhatsApp Us</span>
+                <MessageCircle className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         ))}
@@ -104,7 +106,7 @@ export default function ServiceAreasPage() {
               Is my property eligible if it is outside Hoodi or Whitefield?
             </h3>
             <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              Yes. While Whitefield, Hoodi, and Garudachar Palya are our core operational hubs, we support residential layouts and commercial facilities across Bengaluru based on property scale and schedule feasibility. Submit your details through the quote form to initiate a site review.
+              Yes. While Whitefield, Hoodi, and Garudachar Palya are our core operational hubs, we support residential layouts and commercial properties across Bengaluru based on property scale and schedule feasibility. Contact Aruna at {businessInfo.primaryPhoneDisplay} to confirm site availability.
             </p>
           </div>
           <div className="bg-white p-5 rounded-xl border border-gray-200 space-y-1.5">
@@ -112,7 +114,7 @@ export default function ServiceAreasPage() {
               How quickly can an operations supervisor visit our property?
             </h3>
             <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              For properties within confirmed zones (Whitefield, Hoodi, Garudachar Palya), initial physical site visits can typically be coordinated within 24 to 48 business hours following enquiry review.
+              For properties within Hoodi, Garudachar Palya, and Whitefield, physical site inspections can typically be scheduled within 24 to 48 business hours following direct phone or WhatsApp contact.
             </p>
           </div>
         </div>

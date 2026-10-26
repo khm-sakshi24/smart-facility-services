@@ -90,7 +90,7 @@ export const SmartAssistant: React.FC = () => {
         id: Date.now().toString(),
         sender: "bot",
         text: "Because facility scale, equipment age, and association requirements differ, we never invent generic rates. All commercial pricing is provided through a formal quotation following a physical or technical site evaluation.",
-        actionLink: { href: "/quote", label: "Request a Custom Quote" },
+        actionLink: { href: "/contact", label: "Contact Us to Discuss" },
       };
     }
 
@@ -107,8 +107,8 @@ export const SmartAssistant: React.FC = () => {
     return {
       id: Date.now().toString(),
       sender: "bot",
-      text: "Thank you for asking. Smart Facility Services specializes in facility upkeep, mechanical & electrical maintenance, and environmental plants for apartments and commercial spaces. Would you like to request an inspection and quotation?",
-      actionLink: { href: "/quote", label: "Go to Quote Request Form" },
+      text: "Thank you for asking. Smart Facility Services specializes in facility upkeep, mechanical & electrical maintenance, and environmental plants for apartments and commercial spaces. Would you like to speak directly with our team?",
+      actionLink: { href: "/contact", label: "Contact Smart Facility Services" },
     };
   };
 

@@ -19,13 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/process`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/service-areas`,
+      url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
@@ -34,16 +28,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/quote`,
+      url: `${baseUrl}/service-areas`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/process`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -60,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: service.status === "confirmed" ? 0.85 : 0.6,
+    priority: 0.8,
   }));
 
   return [...staticRoutes, ...serviceRoutes];
