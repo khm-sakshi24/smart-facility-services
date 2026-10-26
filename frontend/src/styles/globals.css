@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-forest: #14532d;
+  --primary-forest-dark: #0f3e2e;
+  --primary-forest-light: #16a34a;
+  --accent-pink: #ec4899;
+  --accent-pink-subtle: #fdf2f8;
+}
+
+body {
+  color: #1f2937;
+  background-color: #ffffff;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom focus rings for accessibility */
+*:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #bbf7d0;
+  color: #14532d;
+}

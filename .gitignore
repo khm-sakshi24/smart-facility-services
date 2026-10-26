@@ -1,0 +1,29 @@
+# Node / Next.js
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Java / Maven
+backend/target/
+backend/.mvn/
+backend/*.log
+backend/.env
+
+# Local Tools
+tools/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.useroscan
+*.sln.docstates
+.DS_Store
+Thumbs.db
