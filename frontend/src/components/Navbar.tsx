@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
       <div className="bg-forest-950 text-emerald-100 text-xs py-1.5 px-4 sm:px-8 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="truncate">Serving Hoodi, Garudachar Palya, Whitefield &amp; Bengaluru</span>
+          <span className="truncate">Serving Hoodi, Garudachar Palya, Whitefield &amp; Bengaluru • <strong>24/7 Support</strong></span>
         </div>
         <div className="flex items-center space-x-4 shrink-0">
           <a

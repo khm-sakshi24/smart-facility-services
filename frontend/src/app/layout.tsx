@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { StructuredData } from "@/components/StructuredData";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { WelcomeAnnouncement } from "@/components/WelcomeAnnouncement";
 import { StickyMobileContactBar } from "@/components/StickyMobileContactBar";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
@@ -72,7 +73,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col font-sans selection:bg-emerald-200 selection:text-forest-950">
+      <body className="min-h-screen flex flex-col font-sans selection:bg-emerald-200 selection:text-forest-950 pb-20 sm:pb-0">
+        <ScrollProgressBar />
         <LanguageProvider>
           <StructuredData type="LocalBusiness" />
           <WelcomeAnnouncement />

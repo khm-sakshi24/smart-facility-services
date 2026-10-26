@@ -432,14 +432,14 @@ export const SmartAssistant: React.FC = () => {
   return (
     <>
       {/* Floating Smart Assistant Launcher Button */}
-      <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40">
+      <div className="fixed bottom-16 sm:bottom-6 right-3 sm:right-6 z-40">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2.5 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-4 py-3 sm:py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group border-2 border-emerald-400/40"
+          className="flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 group border-2 border-emerald-400/40 cursor-pointer"
           aria-label="Open Smart Facility Assistant Chat"
           title="Open Smart Facility Assistant"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-xs">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-xs shrink-0">
             <Image
               src="/images/logo.png"
               alt="Smart Facility Services"
@@ -448,12 +448,15 @@ export const SmartAssistant: React.FC = () => {
               className="w-full h-full object-cover rounded-full"
             />
           </div>
-          <span className="font-bold text-xs sm:text-sm tracking-wide">
+          <span className="font-bold text-xs sm:text-sm tracking-wide hidden sm:inline">
             Smart Facility Assistant
           </span>
-          <span className="relative flex h-2.5 w-2.5">
+          <span className="font-bold text-xs sm:hidden">
+            Assistant
+          </span>
+          <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
           </span>
         </button>
       </div>

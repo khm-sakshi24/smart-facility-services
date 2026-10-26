@@ -95,14 +95,20 @@ export default function ContactPage() {
 
       {/* Page Header */}
       <div className="max-w-3xl space-y-4">
-        <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-          Direct Facility Communication
-        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            Direct Facility Communication
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
+            <Clock className="w-3.5 h-3.5 text-emerald-700" />
+            <span>24/7 Emergency Support Available</span>
+          </span>
+        </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
           Contact Smart Facility Services
         </h1>
-        <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-          Reach out directly to discuss your residential society, apartment association, or commercial facility maintenance requirements. We are ready to help.
+        <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
+          Reach out directly to discuss your residential society, apartment association, or commercial facility maintenance requirements. We are available 24/7 for emergency coordination and property consultations.
         </p>
       </div>
 
