@@ -106,7 +106,7 @@ export default function ServiceAreasPage() {
               Is my property eligible if it is outside Hoodi or Whitefield?
             </h3>
             <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-              Yes. While Whitefield, Hoodi, and Garudachar Palya are our core operational hubs, we support residential layouts and commercial properties across Bengaluru based on property scale and schedule feasibility. Contact Aruna at {businessInfo.primaryPhoneDisplay} to confirm site availability.
+              Yes. While Whitefield, Hoodi, and Garudachar Palya are our core operational hubs, we support residential layouts and commercial properties across Bengaluru based on property scale and schedule feasibility. Contact Smart Facility Services at {businessInfo.primaryPhoneDisplay} to confirm site availability.
             </p>
           </div>
           <div className="bg-white p-5 rounded-xl border border-gray-200 space-y-1.5">

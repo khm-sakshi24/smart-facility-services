@@ -39,9 +39,9 @@ export default function ServicesPage() {
         {/* Quick Contact Bar */}
         <div className="p-4 rounded-2xl bg-forest-50 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs text-gray-700 text-center sm:text-left">
-            Have questions about any service? Speak directly with <strong>{businessInfo.contactPerson}</strong>.
+            Have questions about any service? Speak directly with our operations team.
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <a
               href={getPhoneLink()}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-semibold text-xs shadow-xs transition-colors"

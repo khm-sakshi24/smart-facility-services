@@ -1,10 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
-import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
-import { Target, Eye, CheckCircle2, Phone, MessageCircle } from "lucide-react";
+import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
+import { Target, Eye, CheckCircle2, Phone, MessageCircle, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us | Smart Facility Services Bengaluru",
@@ -21,25 +22,40 @@ export default function AboutPage() {
       <StructuredData
         type="BreadcrumbList"
         breadcrumbs={[
-          { name: "Home", item: "https://smartfacilityservices.com" },
-          { name: "About Us", item: "https://smartfacilityservices.com/about" },
+          { name: "Home", item: businessInfo.siteUrl },
+          { name: "About Us", item: `${businessInfo.siteUrl}/about` },
         ]}
       />
 
       <Breadcrumb items={[{ label: "About Us" }]} />
 
-      {/* Header */}
-      <div className="max-w-3xl space-y-4">
-        <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-          Company Overview
-        </span>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
-          About Smart Facility Services
-        </h1>
-        <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal">
-          {businessInfo.aboutIntro}
-        </p>
+      {/* Header with Company Logo */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-white shadow-lg border-2 border-emerald-500/30 p-1 shrink-0">
+          <Image
+            src="/images/logo.png"
+            alt="Smart Facility Services Company Logo"
+            width={96}
+            height={96}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+        <div className="max-w-3xl space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            Company Overview
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight">
+            About Smart Facility Services
+          </h1>
+          <p className="text-xs sm:text-sm text-emerald-800 font-semibold tracking-wide">
+            {businessInfo.tagline}
+          </p>
+        </div>
       </div>
+
+      <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal max-w-4xl">
+        {businessInfo.aboutIntro}
+      </p>
 
       {/* Mission & Philosophy Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -113,15 +129,15 @@ export default function AboutPage() {
         <div>
           <h3 className="text-2xl font-bold">Connect With Our Team</h3>
           <p className="text-sm text-emerald-200 mt-1">
-            Speak directly with <strong>{businessInfo.contactPerson}</strong> at <strong>{businessInfo.primaryPhoneDisplay}</strong> to discuss your property.
+            Speak directly with Smart Facility Services at <strong>{businessInfo.primaryPhoneDisplay}</strong> or email <strong>{businessInfo.email}</strong>.
           </p>
         </div>
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
           <a
             href={getPhoneLink()}
             className="px-6 py-3 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-sm shadow flex items-center gap-2 transition-colors"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 h-4 text-forest-800" />
             <span>Call Us</span>
           </a>
           <a
@@ -132,6 +148,13 @@ export default function AboutPage() {
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp</span>
+          </a>
+          <a
+            href={getEmailLink()}
+            className="px-6 py-3 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-sm border border-emerald-500/40 shadow flex items-center gap-2 transition-colors"
+          >
+            <Mail className="w-4 h-4 text-emerald-300" />
+            <span>Email Us</span>
           </a>
         </div>
       </div>

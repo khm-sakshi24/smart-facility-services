@@ -33,7 +33,7 @@ export default function ProcessPage() {
     {
       num: "01",
       title: "Contact Smart Facility Services",
-      desc: "Reach out via phone call, WhatsApp, or email. Speak directly with Aruna to share your initial property maintenance inquiry.",
+      desc: "Reach out via phone call, WhatsApp, or email. Speak directly with our operations team to share your initial property maintenance inquiry.",
       icon: Phone,
       deliverable: "Immediate direct communication with our operations coordinator.",
     },
@@ -138,7 +138,7 @@ export default function ProcessPage() {
           Ready to Start Step 1?
         </h3>
         <p className="text-sm text-emerald-100 max-w-xl mx-auto leading-relaxed">
-          Contact Aruna directly by phone or WhatsApp to discuss your property maintenance needs today.
+          Contact Smart Facility Services directly by phone or WhatsApp to discuss your property maintenance needs today.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <a
@@ -149,7 +149,7 @@ export default function ProcessPage() {
             <span>Call Now: {businessInfo.contact.phoneFormatted}</span>
           </a>
           <a
-            href={getWhatsAppLink("Hello Aruna, I would like to discuss Step 1 of your facility services work process.")}
+            href={getWhatsAppLink("Hello Smart Facility Services, I would like to discuss Step 1 of your facility services work process.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-sm shadow transition-colors w-full sm:w-auto"

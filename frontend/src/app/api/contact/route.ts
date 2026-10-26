@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
       {
         success: true,
         referenceNumber,
-        message: "Thank you! Your message has been received. Aruna from Smart Facility Services will contact you shortly.",
+        message: "Thank you! Your message has been received. The Smart Facility Services team will contact you shortly.",
         forwardedToBackend,
       },
       { status: 201 }

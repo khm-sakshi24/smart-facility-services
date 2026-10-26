@@ -47,7 +47,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
   const IconComponent = iconMap[service.iconName] || Settings;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+    <div className="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
       <div className="p-6">
         {/* Top Category and Status Badge */}
         <div className="flex items-center justify-between gap-2 mb-4">

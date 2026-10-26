@@ -7,6 +7,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { WelcomeAnnouncement } from "@/components/WelcomeAnnouncement";
 import { StickyMobileContactBar } from "@/components/StickyMobileContactBar";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
+import { SmartAssistant } from "@/components/SmartAssistant";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { businessInfo } from "@/config/businessInfo";
 
@@ -80,6 +81,7 @@ export default function RootLayout({
           <Footer />
           <StickyMobileContactBar />
           <FloatingWhatsAppButton />
+          <SmartAssistant />
           <ScrollToTopButton />
         </LanguageProvider>
       </body>

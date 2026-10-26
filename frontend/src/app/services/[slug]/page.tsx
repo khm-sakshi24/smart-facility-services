@@ -244,25 +244,32 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
         <div>
           <h3 className="text-2xl font-bold">Interested in {service.title}?</h3>
           <p className="text-sm text-emerald-200 mt-1">
-            Contact <strong>{businessInfo.contactPerson}</strong> at <strong>{businessInfo.primaryPhoneDisplay}</strong> to schedule a site walkthrough.
+            Contact Smart Facility Services at <strong>{businessInfo.primaryPhoneDisplay}</strong> or <strong>{businessInfo.email}</strong> to discuss property requirements.
           </p>
         </div>
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
           <a
             href={getPhoneLink()}
             className="px-5 py-2.5 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-xs sm:text-sm shadow flex items-center gap-1.5 transition-colors"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 h-4 text-forest-800" />
             <span>Call Now</span>
           </a>
           <a
-            href={getWhatsAppLink(`Inquiring about ${service.title}`)}
+            href={getWhatsAppLink(`Hello Smart Facility Services, I would like to know more about ${service.title}.`)}
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow flex items-center gap-1.5 transition-colors"
           >
             <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp</span>
+            <span>WhatsApp Us</span>
+          </a>
+          <a
+            href={getEmailLink(`Enquiry about ${service.title}`)}
+            className="px-5 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs sm:text-sm border border-emerald-500/40 shadow flex items-center gap-1.5 transition-colors"
+          >
+            <Mail className="w-4 h-4 text-emerald-300" />
+            <span>Email Us</span>
           </a>
         </div>
       </div>

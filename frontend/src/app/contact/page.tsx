@@ -261,7 +261,7 @@ export default function ContactPage() {
               Send us a quick WhatsApp text with your building name and required services for the quickest response.
             </p>
             <a
-              href={getWhatsAppLink("Hello Aruna, I would like to discuss facility services with Smart Facility Services.")}
+              href={getWhatsAppLink("Hello Smart Facility Services, I would like to discuss facility services for my property.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-white hover:bg-emerald-50 text-forest-950 font-bold text-sm shadow transition-colors"
@@ -277,7 +277,7 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold text-forest-950">Send Us a Direct Message</h2>
             <p className="text-sm text-gray-600 mt-1">
-              Fill in your details below and Aruna from Smart Facility Services will get back to you promptly.
+              Fill in your details below and our operations team will get back to you promptly.
             </p>
           </div>
 
@@ -416,7 +416,7 @@ export default function ContactPage() {
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-emerald-300" />
-                      <span>Send Message to Aruna</span>
+                      <span>Send Message to Smart Facility Services</span>
                     </>
                   )}
                 </button>

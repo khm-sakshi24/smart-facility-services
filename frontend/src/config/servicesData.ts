@@ -15,7 +15,7 @@ export interface ServiceDetail {
 
 export const servicesCatalogue: ServiceDetail[] = [
   {
-    slug: "housekeeping-cleaning-services",
+    slug: "housekeeping",
     title: "Housekeeping and Cleaning Services",
     category: "Core Facility Operations",
     status: "active",
@@ -87,7 +87,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "plumbing-services",
+    slug: "plumbing",
     title: "Plumbing Services",
     category: "Technical & Electrical",
     status: "active",
@@ -121,7 +121,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "hvac-air-conditioning-maintenance",
+    slug: "hvac-maintenance",
     title: "HVAC and Air-Conditioning Maintenance",
     category: "Technical & Electrical",
     status: "active",
@@ -188,7 +188,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "general-building-maintenance",
+    slug: "general-maintenance",
     title: "General Maintenance",
     category: "Core Facility Operations",
     status: "active",
@@ -325,7 +325,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "sewage-tank-cleaning-work",
+    slug: "sewage-tank-cleaning",
     title: "Sewage Tank Cleaning Work",
     category: "Water & Environmental",
     status: "active",
@@ -358,7 +358,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "swimming-pool-maintenance-chemicals",
+    slug: "swimming-pool-maintenance",
     title: "Swimming Pool Maintenance with Chemicals",
     category: "Specialized Maintenance",
     status: "active",
@@ -422,7 +422,7 @@ export const servicesCatalogue: ServiceDetail[] = [
     ]
   },
   {
-    slug: "erection-commissioning-installation",
+    slug: "erection-commissioning-installation-maintenance",
     title: "Erection, Commissioning and Installation Maintenance",
     category: "Specialized Maintenance",
     status: "proposed",

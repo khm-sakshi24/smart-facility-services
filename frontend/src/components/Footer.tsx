@@ -2,23 +2,30 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
 import { servicesCatalogue } from "@/config/servicesData";
-import { ShieldCheck, MapPin, Phone, MessageCircle, Mail, User } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Mail } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-forest-950 text-gray-300 border-t border-forest-900 pb-16 md:pb-0">
+    <footer className="bg-forest-950 text-gray-300 border-t border-forest-900 pb-20 md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-forest-800 flex items-center justify-center text-white border border-emerald-500/30">
-                <ShieldCheck className="w-6 h-6 text-emerald-300" />
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-white shadow-md border-2 border-emerald-500/40 p-0.5 shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Smart Facility Services Company Logo"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
               <div>
-                <span className="font-bold text-lg text-white tracking-tight">
+                <span className="font-extrabold text-lg text-white tracking-tight block">
                   {businessInfo.name}
                 </span>
                 <p className="text-xs text-emerald-400 font-medium">
@@ -27,7 +34,7 @@ export const Footer: React.FC = () => {
               </div>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              {businessInfo.aboutIntro}
+              Smart Facility Services provides dependable facility management, MEP maintenance, and comprehensive building operations for residential societies, apartment associations, and commercial facilities in Bengaluru.
             </p>
           </div>
 
@@ -44,7 +51,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/services" className="hover:text-emerald-300 transition-colors">
-                  Our Services
+                  All 13 Services
                 </Link>
               </li>
               <li>
@@ -54,100 +61,116 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/service-areas" className="hover:text-emerald-300 transition-colors">
-                  Service Areas
+                  Service Areas (Hoodi, Whitefield)
+                </Link>
+              </li>
+              <li>
+                <Link href="/process" className="hover:text-emerald-300 transition-colors">
+                  Our Work Process
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-emerald-300 transition-colors">
-                  Contact Us
+                  Contact Us Directly
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy" className="hover:text-emerald-300 transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Main Services Links */}
+          {/* Key Services */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
-              Facility Services
+              Featured Services
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm">
+            <ul className="space-y-2.5 text-sm">
               {servicesCatalogue.slice(0, 6).map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="hover:text-emerald-300 transition-colors text-gray-300"
+                    className="hover:text-emerald-300 transition-colors flex items-center justify-between"
                   >
-                    {service.title}
+                    <span>{service.title}</span>
+                    <span className="text-xs text-emerald-500/70">&rarr;</span>
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/services" className="text-emerald-400 font-semibold hover:underline">
-                  + View All 13 Services
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Verified Contact Details */}
+          {/* Direct Communication Channels */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
-              Contact Us Directly
+              Direct Contact
             </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2.5">
-                <User className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="text-gray-200 font-medium">Contact: {businessInfo.contactPerson}</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a
-                  href={getPhoneLink()}
-                  className="text-gray-200 hover:text-emerald-300 transition-colors font-semibold"
-                >
-                  {businessInfo.primaryPhoneDisplay}
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-200 hover:text-emerald-300 transition-colors"
-                >
-                  WhatsApp Chat
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a
-                  href={getEmailLink()}
-                  className="text-gray-200 hover:text-emerald-300 transition-colors break-all"
-                >
-                  {businessInfo.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5 pt-1">
-                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-300">
-                  Hoodi, Garudachar Palya, Whitefield, Bengaluru
-                </span>
-              </li>
-            </ul>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-start space-x-3">
+                <Phone className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                <div>
+                  <span className="text-xs text-gray-400 block">Phone Call</span>
+                  <a
+                    href={getPhoneLink()}
+                    className="font-bold text-white hover:text-emerald-300 transition-colors"
+                  >
+                    {businessInfo.primaryPhoneDisplay}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <MessageCircle className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                <div>
+                  <span className="text-xs text-gray-400 block">WhatsApp Support</span>
+                  <a
+                    href={getWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <Mail className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                <div>
+                  <span className="text-xs text-gray-400 block">Official Email</span>
+                  <a
+                    href={getEmailLink()}
+                    className="font-bold text-white hover:text-emerald-300 transition-colors break-all text-xs sm:text-sm"
+                  >
+                    {businessInfo.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3 pt-2">
+                <MapPin className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
+                <div className="text-xs text-gray-400">
+                  <strong className="text-gray-200 block">Confirmed Service Corridors:</strong>
+                  <span>Hoodi, Garudachar Palya, Whitefield &amp; Bengaluru, Karnataka</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Legal & Copyright */}
-        <div className="mt-12 pt-8 border-t border-forest-900 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© {new Date().getFullYear()} {businessInfo.name}. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy-policy" className="hover:text-emerald-300 underline">
+        {/* Bottom copyright */}
+        <div className="mt-12 pt-8 border-t border-forest-900/80 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+          <div>
+            &copy; {new Date().getFullYear()} {businessInfo.name}. All rights reserved.
+          </div>
+          <div className="flex items-center space-x-6">
+            <Link href="/privacy-policy" className="hover:text-emerald-400 transition-colors">
               Privacy Policy
             </Link>
-            <span>•</span>
-            <Link href="/contact" className="hover:text-emerald-300 underline">
-              Contact Us
+            <Link href="/contact" className="hover:text-emerald-400 transition-colors">
+              Contact Operations
             </Link>
           </div>
         </div>
