@@ -130,74 +130,19 @@ export const Navbar: React.FC = () => {
               <span>Call Us: {businessInfo.primaryPhoneDisplay}</span>
             </a>
 
-            {/* Mobile Animated Compact Call Button: Pops with animation on touch! */}
+            {/* Mobile Animated Compact Call Button: Directly dials with spring animation on touch! */}
             <div className="relative sm:hidden">
-              <button
-                type="button"
-                onClick={() => setIsCallPopped(!isCallPopped)}
-                aria-label="Call Smart Facility Services"
-                className={`w-9 h-9 rounded-full bg-forest-800 text-white flex items-center justify-center shadow-md border border-emerald-400/40 transition-all duration-300 active:scale-125 ${
-                  isCallPopped
-                    ? "scale-115 bg-emerald-700 ring-2 ring-emerald-400 ring-offset-1"
-                    : "hover:scale-110"
-                }`}
+              <a
+                href={getPhoneLink()}
+                aria-label={`Call Smart Facility Services at ${businessInfo.primaryPhoneDisplay}`}
+                className="w-10 h-10 rounded-full bg-forest-800 hover:bg-forest-900 active:bg-emerald-700 text-white flex items-center justify-center shadow-md border-2 border-emerald-400/60 transition-transform duration-200 active:scale-125 relative"
+                title={`Call Us: ${businessInfo.primaryPhoneDisplay}`}
               >
-                <Phone className={`w-4 h-4 text-emerald-300 ${isCallPopped ? "animate-bounce" : ""}`} />
+                <Phone className="w-4 h-4 text-emerald-300" />
                 <span className="sr-only">Call Us</span>
                 <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span>
-                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full"></span>
-              </button>
-
-              {/* Popping Animated Call Card */}
-              {isCallPopped && (
-                <div className="absolute right-0 top-12 w-72 bg-white rounded-2xl shadow-2xl border border-emerald-200 p-4 z-50 animate-in zoom-in-90 fade-in duration-200 space-y-3">
-                  <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                    <div className="flex items-center gap-1.5">
-                      <Phone className="w-4 h-4 text-emerald-600" />
-                      <span className="text-xs font-extrabold text-forest-950">
-                        Direct Helpline
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-forest-950">
-                      24/7 Active
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-gray-400 block tracking-wider">
-                      Tap to Dial Directly:
-                    </span>
-                    <a
-                      href={getPhoneLink()}
-                      onClick={() => setIsCallPopped(false)}
-                      className="block text-base font-extrabold text-forest-900 hover:text-emerald-700 tracking-tight transition-colors py-1"
-                    >
-                      {businessInfo.primaryPhoneDisplay}
-                    </a>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <a
-                      href={getPhoneLink()}
-                      onClick={() => setIsCallPopped(false)}
-                      className="py-2 px-3 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-emerald-300" />
-                      <span>Dial Now</span>
-                    </a>
-                    <a
-                      href={getWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsCallPopped(false)}
-                      className="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform"
-                    >
-                      <MessageCircle className="w-3.5 h-3.5" />
-                      <span>WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
-              )}
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white"></span>
+              </a>
             </div>
 
             {/* Mobile Hamburger menu toggle */}

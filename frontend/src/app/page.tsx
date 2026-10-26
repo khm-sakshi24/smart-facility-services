@@ -225,48 +225,73 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. Executive Quick Trust Bar (Clean corporate metrics) */}
+      {/* 2. Executive Quick Trust Bar: Every Metric Card is Clickable and Actionable! */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-xs p-4 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
-          <div className="flex items-center gap-3 p-2">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center shrink-0">
-              <Building2 className="w-5 h-5 text-emerald-700" />
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-xs p-3 sm:p-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+          <a
+            href="#services"
+            className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-emerald-50/60 active:scale-95 transition-all group cursor-pointer"
+            title="Explore 13 facility disciplines"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 group-hover:bg-forest-800 group-hover:text-emerald-300 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+              <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-extrabold text-sm sm:text-base text-forest-950">13 Disciplines</p>
-              <p className="text-[11px] text-gray-500">Housekeeping, MEP &amp; Water</p>
+              <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
+                13 Disciplines
+              </p>
+              <p className="text-[11px] text-gray-500">Tap to browse &darr;</p>
             </div>
-          </div>
+          </a>
 
-          <div className="flex items-center gap-3 p-2 pt-3 sm:pt-2 sm:pl-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center shrink-0">
-              <Clock className="w-5 h-5 text-emerald-700" />
+          <button
+            type="button"
+            onClick={() => setSelectedLocation("Hoodi")}
+            className="flex items-center gap-3 p-2.5 pt-3 sm:pt-2.5 sm:pl-4 rounded-xl hover:bg-emerald-50/60 active:scale-95 transition-all group cursor-pointer text-left w-full"
+            title="View live dispatch map"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 group-hover:bg-forest-800 group-hover:text-emerald-300 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+              <Clock className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-extrabold text-sm sm:text-base text-forest-950">&lt; 30-Min Dispatch</p>
-              <p className="text-[11px] text-gray-500">Hoodi, Garudachar Palya, Whitefield</p>
+              <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
+                &lt; 30-Min Dispatch
+              </p>
+              <p className="text-[11px] text-gray-500">Tap for live map &rarr;</p>
             </div>
-          </div>
+          </button>
 
-          <div className="flex items-center gap-3 p-2 pt-3 sm:pt-2 sm:pl-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center shrink-0">
-              <Phone className="w-5 h-5 text-emerald-700" />
+          <a
+            href={getPhoneLink()}
+            className="flex items-center gap-3 p-2.5 pt-3 sm:pt-2.5 sm:pl-4 rounded-xl hover:bg-emerald-50/60 active:scale-95 transition-all group cursor-pointer"
+            title="Call 24/7 emergency response"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 group-hover:bg-forest-800 group-hover:text-emerald-300 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+              <Phone className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-extrabold text-sm sm:text-base text-forest-950">24/7 Response</p>
-              <p className="text-[11px] text-gray-500">Emergency breakdown coordination</p>
+              <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
+                24/7 Response
+              </p>
+              <p className="text-[11px] text-gray-500">Tap to call helpline &rarr;</p>
             </div>
-          </div>
+          </a>
 
-          <div className="flex items-center gap-3 p-2 pt-3 sm:pt-2 sm:pl-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5 text-emerald-700" />
+          <a
+            href="/about"
+            className="flex items-center gap-3 p-2.5 pt-3 sm:pt-2.5 sm:pl-4 rounded-xl hover:bg-emerald-50/60 active:scale-95 transition-all group cursor-pointer"
+            title="View safety & compliance standards"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-forest-800 group-hover:bg-forest-800 group-hover:text-emerald-300 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
+              <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-extrabold text-sm sm:text-base text-forest-950">Strict Compliance</p>
-              <p className="text-[11px] text-gray-500">KSPCB &amp; safety certified standards</p>
+              <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
+                Strict Compliance
+              </p>
+              <p className="text-[11px] text-gray-500">KSPCB &amp; safety certified</p>
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -379,30 +404,121 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {workProcessSteps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.num}
-                className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs space-y-2 flex flex-col justify-between"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="w-7 h-7 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center">
-                      {step.num}
-                    </span>
-                    <Icon className="w-4 h-4 text-forest-700" />
-                  </div>
-                  <h3 className="font-bold text-sm text-gray-900 leading-snug">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    {step.desc}
-                  </p>
+          {/* Step 01: Interactive link to services */}
+          <a
+            href="#services"
+            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            title="Click to discover all 13 facility disciplines"
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="w-8 h-8 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center shadow-xs">
+                  01
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center group-hover:bg-forest-800 group-hover:text-emerald-300 transition-colors">
+                  <Search className="w-4 h-4" />
                 </div>
               </div>
-            );
-          })}
+              <h3 className="font-bold text-sm text-gray-900 group-hover:text-forest-900 transition-colors">
+                Discover Required Service
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Explore our 13 disciplines or speak with operations to pinpoint your property's specific maintenance scope.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:text-forest-900">
+              <span>Browse 13 Services</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
+
+          {/* Step 02: Interactive direct call */}
+          <a
+            href={getPhoneLink()}
+            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            title={`Call Operations Helpline: ${businessInfo.primaryPhoneDisplay}`}
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="w-8 h-8 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center shadow-xs">
+                  02
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center group-hover:bg-forest-800 group-hover:text-emerald-300 transition-colors">
+                  <Phone className="w-4 h-4" />
+                </div>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900 group-hover:text-forest-900 transition-colors">
+                Direct Operations Contact
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Connect 24/7 via phone or WhatsApp to schedule a site review with our technical supervisor.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:text-forest-900">
+              <span>Call Helpline Directly</span>
+              <Phone className="w-3.5 h-3.5" />
+            </div>
+          </a>
+
+          {/* Step 03: Interactive WhatsApp schedule review */}
+          <a
+            href={getWhatsAppLink(
+              "Hello Smart Facility Services, I would like to schedule a property & scope review for our building."
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            title="Schedule review on WhatsApp"
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="w-8 h-8 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center shadow-xs">
+                  03
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center group-hover:bg-forest-800 group-hover:text-emerald-300 transition-colors">
+                  <CalendarCheck className="w-4 h-4" />
+                </div>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900 group-hover:text-forest-900 transition-colors">
+                Property &amp; Scope Review
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                We assess unit count, pump rooms, electrical panels, and confirm transparent operational checklists.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:text-forest-900">
+              <span>Book Review on WhatsApp</span>
+              <MessageCircle className="w-3.5 h-3.5" />
+            </div>
+          </a>
+
+          {/* Step 04: Interactive standards review */}
+          <a
+            href="/about"
+            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            title="View our daily delivery standards"
+          >
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="w-8 h-8 rounded-full bg-forest-800 text-emerald-300 text-xs font-bold flex items-center justify-center shadow-xs">
+                  04
+                </span>
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-forest-800 flex items-center justify-center group-hover:bg-forest-800 group-hover:text-emerald-300 transition-colors">
+                  <Wrench className="w-4 h-4" />
+                </div>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900 group-hover:text-forest-900 transition-colors">
+                Routine Daily Delivery
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Trained personnel deployed promptly with digital checklist sign-offs and routine supervisor audits.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:text-forest-900">
+              <span>View Service Standards</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
         </div>
       </section>
 
