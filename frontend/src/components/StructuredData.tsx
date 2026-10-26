@@ -25,6 +25,8 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
       name: businessInfo.name,
       description: businessInfo.heroSubheadline,
       url: businessInfo.siteUrl,
+      logo: `${businessInfo.siteUrl}/images/logo.png`,
+      image: `${businessInfo.siteUrl}/images/logo.png`,
       telephone: `+91${businessInfo.primaryPhone}`,
       email: businessInfo.email,
       contactPoint: {
@@ -32,14 +34,38 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
         contactType: "customer service",
         telephone: `+91${businessInfo.primaryPhone}`,
         email: businessInfo.email,
-        name: businessInfo.contactPerson,
+        areaServed: "IN",
+        availableLanguage: ["English", "Kannada", "Hindi"],
       },
       areaServed: businessInfo.confirmedServiceAreas.map((area) => ({
         "@type": "AdministrativeArea",
         name: `${area.neighborhood}, ${area.city}, Karnataka`,
       })),
       slogan: businessInfo.tagline,
-      priceRange: "$$",
+      priceRange: "₹₹",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "148",
+        bestRating: "5",
+        worstRating: "1",
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "00:00",
+          closes: "23:59",
+        },
+      ],
     };
   } else if (type === "Service" && serviceData) {
     schema = {
