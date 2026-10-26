@@ -4,24 +4,23 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useLanguage } from "./LanguageContext";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
-import { Menu, X, Phone, Globe, Mail, MessageCircle, Clock, Sparkles } from "lucide-react";
+import { Menu, X, Phone, Mail, MessageCircle, Clock } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCallPopped, setIsCallPopped] = useState(false);
   const callPopoverRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const { language, setLanguage, t } = useLanguage();
 
+  // Clean, consistent English navigation links
   const navLinks = [
-    { href: "/", label: t.nav.home },
-    { href: "/services", label: t.nav.services },
-    { href: "/about", label: t.nav.about },
-    { href: "/service-areas", label: t.nav.serviceAreas },
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/about", label: "About Us" },
+    { href: "/service-areas", label: "Service Areas" },
     { href: "/#reviews", label: "Reviews" },
-    { href: "/contact", label: t.nav.contact },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   const isActive = (href: string) => {
@@ -50,7 +49,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs transition-all">
-      {/* Top Micro-Bar: Desktop Only (Hidden on mobile to eliminate clutter) */}
+      {/* Top Micro-Bar: Desktop Only */}
       <div className="hidden sm:flex bg-forest-950 text-emerald-100 text-xs py-1.5 px-4 sm:px-8 justify-between items-center">
         <div className="flex items-center space-x-2">
           <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -59,10 +58,10 @@ export const Navbar: React.FC = () => {
             <strong>24/7 Support</strong>
           </span>
         </div>
-        <div className="flex items-center space-x-4 shrink-0">
+        <div className="flex items-center space-x-5 shrink-0">
           <a
             href={`mailto:${businessInfo.email}`}
-            className="hidden md:inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-medium transition-colors"
           >
             <Mail className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-[11px]">{businessInfo.email}</span>
@@ -74,17 +73,6 @@ export const Navbar: React.FC = () => {
             <Phone className="w-3.5 h-3.5 text-emerald-400" />
             <span>{businessInfo.primaryPhoneDisplay}</span>
           </a>
-          <button
-            onClick={() => setLanguage(language === "en" ? "kn" : "en")}
-            className="flex items-center space-x-1 px-2.5 py-0.5 rounded bg-emerald-900/70 hover:bg-emerald-800 text-white text-xs transition-colors"
-            title="Toggle English / ಕನ್ನಡ"
-            aria-label="Toggle Language"
-          >
-            <Globe className="w-3.5 h-3.5 text-brandPink-300" />
-            <span className="font-medium">
-              {language === "en" ? "ಕನ್ನಡ" : "English"}
-            </span>
-          </button>
         </div>
       </div>
 
@@ -114,7 +102,7 @@ export const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Clean English) */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
@@ -242,7 +230,7 @@ export const Navbar: React.FC = () => {
             </Link>
           ))}
 
-          {/* Quick Contact & Language in Mobile Drawer */}
+          {/* Quick Contact in Mobile Drawer */}
           <div className="pt-3 border-t border-gray-100 flex flex-col gap-2">
             <a
               href={getPhoneLink()}
@@ -262,18 +250,9 @@ export const Navbar: React.FC = () => {
               <span>WhatsApp Us (Official)</span>
             </a>
 
-            <div className="flex items-center justify-between pt-2 px-1 text-xs text-gray-600">
-              <span className="flex items-center gap-1 text-[11px]">
-                <Clock className="w-3.5 h-3.5 text-emerald-600" />
-                <span>24/7 Support Available</span>
-              </span>
-              <button
-                onClick={() => setLanguage(language === "en" ? "kn" : "en")}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 hover:bg-emerald-50 text-forest-900 text-xs font-bold border border-gray-200"
-              >
-                <Globe className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{language === "en" ? "ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಿ" : "Switch to English"}</span>
-              </button>
+            <div className="flex items-center justify-center pt-2 text-xs text-gray-500 gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-emerald-600" />
+              <span>24/7 Support &amp; Emergency Coordination</span>
             </div>
           </div>
         </div>

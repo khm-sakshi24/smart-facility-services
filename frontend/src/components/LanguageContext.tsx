@@ -1,11 +1,11 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { Language, translations, Translations } from "@/config/translations";
+import React, { createContext, useContext, useEffect } from "react";
+import { translations, Translations } from "@/config/translations";
 
 interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
+  language: "en";
+  setLanguage: (lang: "en") => void;
   t: Translations;
 }
 
@@ -16,30 +16,17 @@ const LanguageContext = createContext<LanguageContextType>({
 });
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>("en");
-
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("sfs_lang") as Language;
-      if (saved === "en" || saved === "kn") {
-        setLanguageState(saved);
-      }
+      // Clear any legacy language override from user's browser localStorage
+      localStorage.removeItem("sfs_lang");
     } catch {
-      // ignore SSR or restricted localStorage
+      // ignore SSR
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    try {
-      localStorage.setItem("sfs_lang", lang);
-    } catch {
-      // ignore
-    }
-  };
-
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t: translations[language] }}>
+    <LanguageContext.Provider value={{ language: "en", setLanguage: () => {}, t: translations.en }}>
       {children}
     </LanguageContext.Provider>
   );
