@@ -70,6 +70,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/#reviews" className="hover:text-emerald-300 transition-colors">
+                  Client Reviews &amp; Ratings
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-emerald-300 transition-colors">
                   Contact Us Directly
                 </Link>
