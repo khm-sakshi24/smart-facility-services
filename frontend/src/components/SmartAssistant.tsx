@@ -137,11 +137,11 @@ export const SmartAssistant: React.FC = () => {
       return {
         id: Date.now().toString(),
         sender: "bot",
-        text: `⭐️ Smart Facility Services holds a verified 4.9 out of 5-star customer rating across 148 global client evaluations in Bengaluru!\n\n• 89% 5-Star Ratings\n• 98% Client Recommendation Rate\n• Trusted by leading apartment RWAs and business complexes in Bellandur, Whitefield, Hoodi, and Mahadevapura.\n\nYou can read all verified reviews or write your own customer review in our Amazon-style ratings section on the homepage!`,
+        text: `⭐️ We have just launched our new digital portal and believe in 100% honest transparency!\n\nWe do not use artificial or pre-filled reviews. Every rating on Smart Facility Services is submitted directly by verified apartment associations, RWA committees, and property managers in Bengaluru.\n\nHave we provided facility maintenance, housekeeping, or pump room upkeep for your property? We welcome you to be the first to share your genuine feedback!`,
         actionLinks: {
           pageUrl: "/#reviews",
-          pageLabel: "View Customer Ratings & Reviews",
-          whatsapp: "Hello Smart Facility Services, I saw your 4.9-star reviews and want to discuss maintenance for our society.",
+          pageLabel: "Write / View Genuine Reviews",
+          whatsapp: "Hello Smart Facility Services, I would like to share feedback regarding your services for our property.",
         },
         suggestedQuestions: [
           "💼 How to get an AMC Quote?",
@@ -422,7 +422,7 @@ export const SmartAssistant: React.FC = () => {
       return {
         id: Date.now().toString(),
         sender: "bot",
-        text: `🏢 Smart Facility Services is Bengaluru's premier facility management and building maintenance partner.\n\n• Tagline: "Reliable Support. Every Day."\n• Specialization: Comprehensive facility operations, MEP engineering, water & wastewater systems, and building upkeep for gated communities, apartment associations, and commercial complexes.\n• Customer Rating: 4.9/5 stars based on 148 verified client reviews.`,
+        text: `🏢 Smart Facility Services is Bengaluru's premier facility management and building maintenance partner.\n\n• Tagline: "Reliable Support. Every Day."\n• Specialization: Comprehensive facility operations, MEP engineering, water & wastewater systems, and building upkeep for gated communities, apartment associations, and commercial complexes.\n• Customer Reviews: 100% verified genuine client reviews submitted directly by Bengaluru RWAs and property managers.`,
         actionLinks: {
           call: true,
           whatsapp: "Hello Smart Facility Services, I would like to learn more about your company profile.",
@@ -764,7 +764,7 @@ export const SmartAssistant: React.FC = () => {
     return {
       id: Date.now().toString(),
       sender: "bot",
-      text: `Smart Facility Services provides 24/7 end-to-end facility management, MEP engineering, water operations, and building care across Bengaluru.\n\nI can provide direct information on:\n• 13 Core Disciplines (Housekeeping, STP, Electrical, Plumbing, Pool, Tank Cleaning)\n• 24/7 Emergency Dispatch & <30-min response times\n• Pricing & Custom AMC Proposals for your society\n• Verified 4.9-Star Customer Ratings & Reviews\n• Service hubs in Hoodi, Whitefield, Garudachar Palya, and East Bengaluru\n\nHow may our operations team assist your property today?`,
+      text: `Smart Facility Services provides 24/7 end-to-end facility management, MEP engineering, water operations, and building care across Bengaluru.\n\nI can provide direct information on:\n• 13 Core Disciplines (Housekeeping, STP, Electrical, Plumbing, Pool, Tank Cleaning)\n• 24/7 Emergency Dispatch & <30-min response times\n• Pricing & Custom AMC Proposals for your society\n• Customer Ratings & Reviews (Write a genuine review)\n• Service hubs in Hoodi, Whitefield, Garudachar Palya, and East Bengaluru\n\nHow may our operations team assist your property today?`,
       actionLinks: {
         call: true,
         whatsapp: `Hello Smart Facility Services, I would like to inquire about: "${rawQuery}"`,

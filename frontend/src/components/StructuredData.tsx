@@ -43,13 +43,6 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
       })),
       slogan: businessInfo.tagline,
       priceRange: "₹₹",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "148",
-        bestRating: "5",
-        worstRating: "1",
-      },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",

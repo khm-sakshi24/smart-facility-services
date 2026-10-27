@@ -36,113 +36,8 @@ export interface ReviewItem {
   avatarColor: string;
 }
 
-const INITIAL_REVIEWS: ReviewItem[] = [
-  {
-    id: "rev-1",
-    author: "K. R. Narayanan",
-    role: "President, Management Committee",
-    society: "Green Glen Meadows Apartment Owners Association",
-    location: "Bellandur Outer Ring Road, Bengaluru",
-    rating: 5,
-    date: "18 October 2026",
-    service: "Full Facility Management & Housekeeping",
-    title: "Best facility management decision our society made in 3 years",
-    content:
-      "Our previous housekeeping agency suffered from continuous staff absenteeism and zero supervisor accountability. Smart Facility Services took over our society 8 months ago and completely transformed our building maintenance. Their team is on-site before 7:30 AM daily with biometric attendance, structured checklists, and a dedicated site supervisor. The common corridors, club house, and basement parkings are spotless. Highly recommended for any apartment association in Bengaluru.",
-    helpfulCount: 46,
-    verified: true,
-    avatarColor: "bg-emerald-700",
-  },
-  {
-    id: "rev-2",
-    author: "Venkatesh Rao",
-    role: "Secretary & Technical Lead",
-    society: "Prestige Silver Oak Community",
-    location: "Whitefield Main Road, Bengaluru",
-    rating: 5,
-    date: "05 October 2026",
-    service: "STP, WTP & 24/7 Emergency Breakdown Support",
-    title: "Saved our society during an urgent STP booster pump failure on Sunday",
-    content:
-      "At 6:30 AM on a Sunday morning, our main overhead water booster pump tripped with a burnt motor coil, threatening water supply for 220 flats. We immediately called the Smart Facility Services 24/7 emergency dispatch helpline. Two certified technicians arrived on site within 22 minutes! They diagnosed the electrical fault, transitioned cleanly to our secondary standby pump, and had pressurized water restored before 8:00 AM. Outstanding rapid response.",
-    helpfulCount: 39,
-    verified: true,
-    avatarColor: "bg-forest-900",
-  },
-  {
-    id: "rev-3",
-    author: "Pooja Sundaram",
-    role: "MC Member, Eco & Sanitation",
-    society: "Ayyappa Nagar Gated Residential Layout",
-    location: "Hoodi, Bengaluru",
-    rating: 5,
-    date: "24 September 2026",
-    service: "Housekeeping & Solid Waste Management",
-    title: "Impeccable waste segregation and daily supervisor audits",
-    content:
-      "Handling daily waste segregation for 120 villas used to be an ongoing headache. Smart Facility Services implemented structured color-coded bins, trained housekeeping personnel, and strictly enforced BBMP wet/dry segregation protocols. The site supervisor conducts digital checklist audits every evening and shares photo sign-offs directly with our committee. Very disciplined, polite, and trustworthy workforce.",
-    helpfulCount: 31,
-    verified: true,
-    avatarColor: "bg-teal-700",
-  },
-  {
-    id: "rev-4",
-    author: "Anand Kulkarni",
-    role: "Head of Infrastructure & Facilities",
-    society: "Bagmane Constellation Tech Tower",
-    location: "Garudachar Palya / Mahadevapura, Bengaluru",
-    rating: 5,
-    date: "11 September 2026",
-    service: "MEP Maintenance & DG Backup Operation",
-    title: "Professional MEP maintenance with strict safety compliance",
-    content:
-      "We contracted Smart Facility Services for preventive MEP maintenance across our commercial facility. Their certified electrical and mechanical engineers handle our 500kVA DG synchronizing panels, main LT distribution switchgear, and fire hydrant lines with absolute adherence to Indian Electricity Rules and KSPCB safety guidelines. Zero unscheduled downtime recorded during heavy monsoon loads.",
-    helpfulCount: 27,
-    verified: true,
-    avatarColor: "bg-slate-800",
-  },
-  {
-    id: "rev-5",
-    author: "Shalini Deshmukh",
-    role: "Resident Welfare Committee",
-    society: "Sowparnika Columns Community",
-    location: "Whitefield Extension, Bengaluru",
-    rating: 5,
-    date: "28 August 2026",
-    service: "Water Tank Cleaning & UV Disinfection",
-    title: "Underground sump and overhead tank cleaning done thoroughly",
-    content:
-      "We booked their specialized team for scientific deep cleaning of our 80,000-liter underground sump and twin overhead tanks. High-pressure rotary jetting, anti-bacterial UV treatment, and industrial sludge vacuuming were completed meticulously without contaminating the freshwater lines. They provided high-resolution before-and-after photographs for our society notice board.",
-    helpfulCount: 22,
-    verified: true,
-    avatarColor: "bg-emerald-800",
-  },
-  {
-    id: "rev-6",
-    author: "Muralidharan S.",
-    role: "Treasurer, Apartment Association",
-    society: "Alpine Eco Residences",
-    location: "Doddanekkundi / Marathahalli, Bengaluru",
-    rating: 5,
-    date: "14 August 2026",
-    service: "Annual Maintenance Contract (AMC) & Building Care",
-    title: "Transparent billing, no hidden fees, and proactive supervisors",
-    content:
-      "Before finalizing Smart Facility Services, our managing committee evaluated four different facility vendors in East Bengaluru. Smart Facility Services stood out with 100% itemized pricing, transparent material procurement invoices, and verified staff background checks. In 10 months of ongoing service, we have not had a single billing dispute. Truly professional and honest partner.",
-    helpfulCount: 19,
-    verified: true,
-    avatarColor: "bg-forest-950",
-  },
-];
-
-// Star Breakdown distribution matching Amazon's 148 verified ratings
-const RATING_BREAKDOWN = [
-  { star: 5, percent: 89, count: 132 },
-  { star: 4, percent: 9, count: 13 },
-  { star: 3, percent: 2, count: 3 },
-  { star: 2, percent: 0, count: 0 },
-  { star: 1, percent: 0, count: 0 },
-];
+// Starting cleanly with 0 reviews — only genuine reviews submitted by real customers
+const INITIAL_REVIEWS: ReviewItem[] = [];
 
 export const CustomerReviewSection: React.FC = () => {
   const [reviews, setReviews] = useState<ReviewItem[]>(INITIAL_REVIEWS);
@@ -158,12 +53,28 @@ export const CustomerReviewSection: React.FC = () => {
   const [formRole, setFormRole] = useState("");
   const [formSociety, setFormSociety] = useState("");
   const [formLocation, setFormLocation] = useState("Bengaluru");
-  const [formService, setFormService] = useState("Housekeeping and Cleaning Services");
+  const [formService, setFormService] = useState("Full Facility Management & Housekeeping");
   const [formTitle, setFormTitle] = useState("");
   const [formContent, setFormContent] = useState("");
   const [formConsent, setFormConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Dynamic Rating Breakdown calculated strictly from genuine reviews
+  const totalReviews = reviews.length;
+  const ratingBreakdown = useMemo(() => {
+    return [5, 4, 3, 2, 1].map((star) => {
+      const count = reviews.filter((r) => r.rating === star).length;
+      const percent = totalReviews > 0 ? Math.round((count / totalReviews) * 100) : 0;
+      return { star, percent, count };
+    });
+  }, [reviews, totalReviews]);
+
+  const averageRating = useMemo(() => {
+    if (totalReviews === 0) return 0;
+    const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+    return (sum / totalReviews).toFixed(1);
+  }, [reviews, totalReviews]);
 
   // Filter options
   const filterCategories = [
@@ -208,7 +119,7 @@ export const CustomerReviewSection: React.FC = () => {
     );
   };
 
-  // Handle review submission
+  // Handle genuine review submission
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -258,7 +169,7 @@ export const CustomerReviewSection: React.FC = () => {
       service: formService,
       title: formTitle.trim(),
       content: formContent.trim(),
-      helpfulCount: 1,
+      helpfulCount: 0,
       verified: true,
       avatarColor: "bg-forest-800",
     };
@@ -286,20 +197,20 @@ export const CustomerReviewSection: React.FC = () => {
           <div className="space-y-1">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-forest-950 text-xs font-bold border border-emerald-300">
               <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Verified Customer Feedback</span>
+              <span>100% Genuine Client Feedback</span>
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
               Customer Ratings &amp; Reviews
             </h2>
             <p className="text-xs sm:text-sm text-gray-600">
-              Transparent, authentic evaluations from apartment management committees and property managers across Bengaluru.
+              Honest, authentic evaluations from apartment management committees and property managers across Bengaluru.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsWriteReviewOpen(!isWriteReviewOpen)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-extrabold text-xs sm:text-sm shadow-md active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-extrabold text-xs sm:text-sm shadow-md active:scale-95 transition-all cursor-pointer"
             >
               <span>{isWriteReviewOpen ? "Close Form" : "✍️ Write a Customer Review"}</span>
             </button>
@@ -319,7 +230,7 @@ export const CustomerReviewSection: React.FC = () => {
                 Thank You! Your Review Is Live
               </h3>
               <p className="text-xs text-gray-700 max-w-md mx-auto">
-                Your rating and review have been recorded and are now displayed in our customer ratings feed below.
+                Your genuine rating and review have been recorded and are now displayed in our customer ratings feed below.
               </p>
             </div>
           ) : (
@@ -350,7 +261,7 @@ export const CustomerReviewSection: React.FC = () => {
                       onClick={() => setFormRating(star)}
                       onMouseEnter={() => setFormHoverRating(star)}
                       onMouseLeave={() => setFormHoverRating(0)}
-                      className="p-1 transition-transform hover:scale-110 focus:outline-none"
+                      className="p-1 transition-transform hover:scale-110 focus:outline-none cursor-pointer"
                     >
                       <Star
                         className={`w-7 h-7 ${
@@ -500,9 +411,9 @@ export const CustomerReviewSection: React.FC = () => {
                   id="consent-check"
                   checked={formConsent}
                   onChange={(e) => setFormConsent(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                  className="mt-1 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                 />
-                <label htmlFor="consent-check" className="text-[11px] text-gray-600 leading-snug">
+                <label htmlFor="consent-check" className="text-[11px] text-gray-600 leading-snug cursor-pointer">
                   I confirm that this review represents an authentic experience of facility services received from Smart Facility Services.
                 </label>
               </div>
@@ -512,14 +423,14 @@ export const CustomerReviewSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsWriteReviewOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-gray-700 hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-extrabold text-xs sm:text-sm shadow-md active:scale-95 transition-all disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-extrabold text-xs sm:text-sm shadow-md active:scale-95 transition-all disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -529,7 +440,7 @@ export const CustomerReviewSection: React.FC = () => {
                   ) : (
                     <>
                       <Send className="w-3.5 h-3.5" />
-                      <span>Submit Customer Review</span>
+                      <span>Submit Genuine Review</span>
                     </>
                   )}
                 </button>
@@ -547,7 +458,7 @@ export const CustomerReviewSection: React.FC = () => {
             {/* Big Number Score */}
             <div className="flex items-baseline gap-2">
               <span className="text-5xl sm:text-6xl font-black text-gray-900 tracking-tight">
-                4.9
+                {totalReviews > 0 ? averageRating : "0.0"}
               </span>
               <span className="text-base sm:text-lg font-bold text-gray-500">
                 out of 5
@@ -560,31 +471,39 @@ export const CustomerReviewSection: React.FC = () => {
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Star
                     key={s}
-                    className="w-6 h-6 text-[#FFA41C] fill-[#FFA41C]"
+                    className={`w-6 h-6 ${
+                      totalReviews > 0 && Number(averageRating) >= s
+                        ? "text-[#FFA41C] fill-[#FFA41C]"
+                        : "text-gray-300"
+                    }`}
                   />
                 ))}
               </div>
               <p className="text-xs sm:text-sm font-bold text-gray-700">
-                148 global client ratings • 98% positive
+                {totalReviews === 0
+                  ? "0 verified customer reviews • Starting clean with 100% genuine reviews"
+                  : `${totalReviews} verified client rating${totalReviews > 1 ? "s" : ""}`}
               </p>
             </div>
           </div>
 
           {/* Amazon-Style Star Breakdown Histogram Bars */}
           <div className="space-y-2 pt-2 max-w-md">
-            {RATING_BREAKDOWN.map((item) => (
+            {ratingBreakdown.map((item) => (
               <button
                 key={item.star}
                 type="button"
                 onClick={() =>
+                  totalReviews > 0 &&
                   setSelectedStarFilter(
                     selectedStarFilter === item.star ? null : item.star
                   )
                 }
+                disabled={totalReviews === 0}
                 className={`w-full group flex items-center gap-3 text-xs font-bold transition-all p-1 rounded-lg ${
                   selectedStarFilter === item.star
                     ? "bg-amber-100/70 ring-1 ring-amber-400"
-                    : "hover:bg-gray-100"
+                    : totalReviews > 0 ? "hover:bg-gray-100 cursor-pointer" : "cursor-default opacity-60"
                 }`}
                 title={`Filter by ${item.star} star ratings (${item.percent}%)`}
               >
@@ -617,7 +536,7 @@ export const CustomerReviewSection: React.FC = () => {
               </span>
               <button
                 onClick={() => setSelectedStarFilter(null)}
-                className="text-xs font-bold text-emerald-700 hover:text-emerald-900 underline"
+                className="text-xs font-bold text-emerald-700 hover:text-emerald-900 underline cursor-pointer"
               >
                 Clear star filter
               </button>
@@ -625,7 +544,7 @@ export const CustomerReviewSection: React.FC = () => {
           )}
 
           <p className="text-[11px] text-gray-500 italic">
-            🛡️ All reviews are vetted by our compliance desk to ensure authentic feedback from verified Bengaluru residential associations and commercial properties.
+            🛡️ Zero fake reviews: We believe in complete honesty. Every review published on Smart Facility Services is submitted directly by verified apartment associations, facility managers, and residents.
           </p>
         </div>
 
@@ -636,13 +555,13 @@ export const CustomerReviewSection: React.FC = () => {
               Review This Facility Service
             </h3>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Share your experience with other apartment management committees, RWA presidents, and facility managers looking for reliable property upkeep.
+              Have we managed your apartment society, housekeeping, or pump rooms? Share your honest feedback with other managing committees across Bengaluru.
             </p>
           </div>
 
           <button
             onClick={() => setIsWriteReviewOpen(true)}
-            className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-gray-100 border-2 border-gray-300 text-gray-900 font-bold text-xs sm:text-sm shadow-xs active:scale-95 transition-all text-center"
+            className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-gray-100 border-2 border-gray-300 text-gray-900 font-bold text-xs sm:text-sm shadow-xs active:scale-95 transition-all text-center cursor-pointer"
           >
             ✍️ Write a Customer Review
           </button>
@@ -663,43 +582,65 @@ export const CustomerReviewSection: React.FC = () => {
 
           <div className="flex items-center gap-2 text-[11px] text-emerald-800 font-bold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>100% Verified Property Accounts in Bengaluru</span>
+            <span>Verified Customer Reviews in Bengaluru</span>
           </div>
         </div>
       </div>
 
-      {/* Filter Tabs by Service Category */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <span className="text-xs font-extrabold text-gray-700 uppercase tracking-wider">
-            Filter Reviews by Service:
-          </span>
-          <span className="text-xs text-gray-500 font-medium">
-            Showing {filteredReviews.length} verified reviews
-          </span>
-        </div>
+      {/* Filter Tabs by Service Category (Visible when reviews exist) */}
+      {totalReviews > 0 && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <span className="text-xs font-extrabold text-gray-700 uppercase tracking-wider">
+              Filter Reviews by Service:
+            </span>
+            <span className="text-xs text-gray-500 font-medium">
+              Showing {filteredReviews.length} verified review{filteredReviews.length === 1 ? "" : "s"}
+            </span>
+          </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          {filterCategories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setSelectedCategoryFilter(cat)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 ${
-                selectedCategoryFilter === cat
-                  ? "bg-forest-800 text-white shadow-xs"
-                  : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          <div className="flex flex-wrap items-center gap-2">
+            {filterCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategoryFilter(cat)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${
+                  selectedCategoryFilter === cat
+                    ? "bg-forest-800 text-white shadow-xs"
+                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Amazon-Style Verified Reviews Feed */}
+      {/* Genuine Reviews Feed */}
       <div className="space-y-6 divide-y divide-gray-200">
-        {filteredReviews.length === 0 ? (
+        {totalReviews === 0 ? (
+          <div className="py-12 px-4 text-center space-y-4 bg-slate-50/60 rounded-3xl border border-dashed border-gray-300">
+            <div className="w-14 h-14 bg-emerald-100 text-forest-800 rounded-full flex items-center justify-center mx-auto shadow-xs">
+              <MessageSquare className="w-7 h-7 text-emerald-700" />
+            </div>
+            <div className="space-y-1 max-w-md mx-auto">
+              <h3 className="font-extrabold text-base text-gray-900">
+                No Customer Reviews Yet
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                We have just launched our new online portal! We only show genuine feedback from actual clients and properties. Be the first to share your experience with Smart Facility Services.
+              </p>
+            </div>
+            <button
+              onClick={() => setIsWriteReviewOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition-all cursor-pointer"
+            >
+              <span>✍️ Be the First to Write a Review</span>
+            </button>
+          </div>
+        ) : filteredReviews.length === 0 ? (
           <div className="py-12 text-center space-y-2">
             <p className="text-sm font-bold text-gray-600">
               No reviews match the selected filter.
@@ -709,7 +650,7 @@ export const CustomerReviewSection: React.FC = () => {
                 setSelectedStarFilter(null);
                 setSelectedCategoryFilter("All");
               }}
-              className="text-xs font-bold text-emerald-700 underline"
+              className="text-xs font-bold text-emerald-700 underline cursor-pointer"
             >
               Reset all filters to view all reviews
             </button>
@@ -781,9 +722,11 @@ export const CustomerReviewSection: React.FC = () => {
 
               {/* Amazon-Style Helpful Action Bar */}
               <div className="pt-2 flex items-center gap-3 text-xs">
-                <span className="text-gray-500 text-[11px]">
-                  {review.helpfulCount} people found this helpful
-                </span>
+                {review.helpfulCount > 0 && (
+                  <span className="text-gray-500 text-[11px]">
+                    {review.helpfulCount} {review.helpfulCount === 1 ? "person" : "people"} found this helpful
+                  </span>
+                )}
 
                 <button
                   type="button"
@@ -792,7 +735,7 @@ export const CustomerReviewSection: React.FC = () => {
                   className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg border text-xs font-bold transition-all active:scale-95 ${
                     helpfulVoted[review.id]
                       ? "bg-emerald-100 border-emerald-300 text-forest-950 cursor-default"
-                      : "bg-white hover:bg-gray-50 border-gray-300 text-gray-800 shadow-2xs"
+                      : "bg-white hover:bg-gray-50 border-gray-300 text-gray-800 shadow-2xs cursor-pointer"
                   }`}
                 >
                   <ThumbsUp className="w-3.5 h-3.5" />
@@ -809,7 +752,7 @@ export const CustomerReviewSection: React.FC = () => {
                     navigator.clipboard?.writeText(window.location.href);
                     alert("Link to review copied to clipboard!");
                   }}
-                  className="text-gray-500 hover:text-gray-800 text-[11px] font-medium"
+                  className="text-gray-500 hover:text-gray-800 text-[11px] font-medium cursor-pointer"
                 >
                   Share
                 </button>
