@@ -113,6 +113,17 @@ body {
   animation: subtlePhoneWiggle 0.5s ease-in-out 1;
 }
 
+/* 4b. Location Marker Single Subtle Pulse */
+@keyframes markerPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.anim-marker-pulse {
+  animation: markerPulse 0.5s ease-out 1;
+}
+
 /* 5. Smooth Viewport Scroll Reveal */
 .scroll-reveal {
   opacity: 0;

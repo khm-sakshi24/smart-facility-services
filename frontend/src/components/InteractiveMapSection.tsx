@@ -177,20 +177,20 @@ export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
 
       {/* Tabs */}
       <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        {mapTabs.map((tab) => (
+        {mapTabs.map((tab, idx) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setSelectedTab(tab)}
-            className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 border ${
+            className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 border hover:-translate-y-0.5 active:scale-95 ${
               selectedTab.id === tab.id
                 ? "bg-forest-900 text-white border-forest-950 shadow-md scale-102"
-                : "bg-white text-gray-700 border-gray-200 hover:bg-emerald-50 hover:border-emerald-300 active:scale-95"
+                : "bg-white text-gray-700 border-gray-200 hover:bg-emerald-50 hover:border-emerald-300"
             }`}
           >
             <MapPin
               className={`w-3.5 h-3.5 ${
-                selectedTab.id === tab.id ? "text-brandPink-300" : "text-emerald-600"
+                selectedTab.id === tab.id ? "text-brandPink-300 anim-marker-pulse" : "text-emerald-600"
               }`}
             />
             <span>{tab.name}</span>

@@ -86,15 +86,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
           </div>
         </div>
 
-        {/* Animated Service Character Showcase (Housekeeping preview) */}
-        {service.slug === "housekeeping" && (
-          <div className="mb-4 pt-1">
-            <ServiceWorkerCharacter
-              serviceSlug={service.slug}
-              isCardHovered={isCardHovered}
-            />
-          </div>
-        )}
+        {/* Animated Service Character Showcase (All 13 Professional Disciplines) */}
+        <div className="mb-4 pt-1">
+          <ServiceWorkerCharacter
+            serviceSlug={service.slug}
+            isCardHovered={isCardHovered}
+          />
+        </div>
 
         {/* Short Description */}
         <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
