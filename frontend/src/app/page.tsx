@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageContext";
@@ -31,6 +31,38 @@ import {
   Check,
 } from "lucide-react";
 
+// Lightweight viewport observer for smooth scroll reveals
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // If reduced motion is requested, reveal immediately
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isInView };
+}
+
 const categories = [
   "All Services",
   "Core Facility Operations",
@@ -44,6 +76,34 @@ export default function HomePage() {
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("All Services");
+
+  // Viewport scroll reveal hooks
+  const servicesReveal = useInView(0.08);
+  const standardsReveal = useInView(0.1);
+  const processReveal = useInView(0.1);
+  const trustBarReveal = useInView(0.2);
+
+  // Factual number counter for "13 Disciplines" (Counts 0 -> 13 in ~1s upon scroll entrance)
+  const [disciplinesCount, setDisciplinesCount] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisciplinesCount(13);
+      return;
+    }
+    if (!trustBarReveal.isInView) return;
+    const target = 13;
+    const duration = 900;
+    const stepTime = duration / target;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += 1;
+      setDisciplinesCount(current);
+      if (current >= target) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [trustBarReveal.isInView]);
 
   const filteredServices = useMemo(() => {
     if (activeCategory === "All Services") {
@@ -143,13 +203,13 @@ export default function HomePage() {
               </span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight leading-[1.2] sm:leading-[1.15]">
+            {/* Main Headline (Gently fades in & translates upward 15-20px) */}
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-forest-950 tracking-tight leading-[1.2] sm:leading-[1.15] anim-hero-heading">
               {businessInfo.heroHeadline}
             </h1>
 
-            {/* Supporting Text */}
-            <p className="text-xs sm:text-base text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto px-1">
+            {/* Supporting Text (Staggered entrance ~200ms afterward) */}
+            <p className="text-xs sm:text-base text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto px-1 anim-hero-sub">
               {businessInfo.heroSubheadline}
             </p>
 
@@ -177,8 +237,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Clean Hero Action Buttons */}
-            <div className="pt-2">
+            {/* Clean Hero Action Buttons (Staggered entrance ~350ms afterward) */}
+            <div className="pt-2 anim-hero-buttons">
               {/* Mobile 2-column layout */}
               <div className="sm:hidden grid grid-cols-2 gap-2.5 max-w-xs mx-auto">
                 <a
@@ -245,7 +305,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. Executive Quick Trust Bar: Every Metric Card is Clickable and Actionable! */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={trustBarReveal.ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-xs p-3 sm:p-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
           <a
             href="#services"
@@ -257,7 +317,7 @@ export default function HomePage() {
             </div>
             <div>
               <p className="font-extrabold text-sm sm:text-base text-forest-950 group-hover:text-emerald-800 transition-colors">
-                13 Disciplines
+                {disciplinesCount} Disciplines
               </p>
               <p className="text-[11px] text-gray-500">Tap to browse &darr;</p>
             </div>
@@ -315,7 +375,13 @@ export default function HomePage() {
       </section>
 
       {/* 3. Complete Services Catalogue with Phone & WhatsApp Action on Every Card */}
-      <section id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section
+        id="services"
+        ref={servicesReveal.ref}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 scroll-reveal ${
+          servicesReveal.isInView ? "is-revealed" : ""
+        }`}
+      >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
           <div className="space-y-1">
             <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
@@ -355,14 +421,20 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Filtered Service Cards Grid */}
+        {/* Filtered Service Cards Grid with Staggered Entrance */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {filteredServices.map((service) => (
-            <ServiceCard
+          {filteredServices.map((service, idx) => (
+            <div
               key={service.slug}
-              service={service}
-              onOpenModal={(svc) => setSelectedService(svc)}
-            />
+              className={`scroll-reveal ${
+                servicesReveal.isInView ? `is-revealed stagger-${(idx % 4) + 1}` : ""
+              }`}
+            >
+              <ServiceCard
+                service={service}
+                onOpenModal={(svc) => setSelectedService(svc)}
+              />
+            </div>
           ))}
         </div>
       </section>
@@ -373,7 +445,12 @@ export default function HomePage() {
       />
 
       {/* 5. Our Operational Excellence & Quality Standards (Consolidated) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section
+        ref={standardsReveal.ref}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 scroll-reveal ${
+          standardsReveal.isInView ? "is-revealed" : ""
+        }`}
+      >
         <div className="text-center max-w-2xl mx-auto space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
             Work Standards
@@ -390,7 +467,9 @@ export default function HomePage() {
           {coreStandards.map((std, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl p-5 border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-md transition-all space-y-2 flex flex-col justify-between"
+              className={`bg-white rounded-2xl p-5 border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-md transition-all space-y-2 flex flex-col justify-between scroll-reveal ${
+                standardsReveal.isInView ? `is-revealed stagger-${(idx % 4) + 1}` : ""
+              }`}
             >
               <div className="space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/60 inline-block">
@@ -409,7 +488,12 @@ export default function HomePage() {
       </section>
 
       {/* 6. Simple 4-Step Process (Clean and concise) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section
+        ref={processReveal.ref}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 scroll-reveal ${
+          processReveal.isInView ? "is-revealed" : ""
+        }`}
+      >
         <div className="text-center max-w-2xl mx-auto space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
             Straightforward Process
@@ -426,7 +510,9 @@ export default function HomePage() {
           {/* Step 01: Interactive link to services */}
           <a
             href="#services"
-            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
+              processReveal.isInView ? "is-revealed stagger-1" : ""
+            }`}
             title="Click to discover all 13 facility disciplines"
           >
             <div className="space-y-2">
@@ -454,7 +540,9 @@ export default function HomePage() {
           {/* Step 02: Interactive direct call */}
           <a
             href={getPhoneLink()}
-            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
+              processReveal.isInView ? "is-revealed stagger-2" : ""
+            }`}
             title={`Call Operations Helpline: ${businessInfo.primaryPhoneDisplay}`}
           >
             <div className="space-y-2">
@@ -486,7 +574,9 @@ export default function HomePage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
+              processReveal.isInView ? "is-revealed stagger-3" : ""
+            }`}
             title="Schedule review on WhatsApp"
           >
             <div className="space-y-2">
@@ -514,7 +604,9 @@ export default function HomePage() {
           {/* Step 04: Interactive standards review */}
           <a
             href="/about"
-            className="bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer"
+            className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
+              processReveal.isInView ? "is-revealed stagger-4" : ""
+            }`}
             title="View our daily delivery standards"
           >
             <div className="space-y-2">

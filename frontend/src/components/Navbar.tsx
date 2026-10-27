@@ -108,7 +108,7 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
+                className={`px-3.5 py-2 rounded-xl text-sm font-bold transition-all nav-link-animated ${
                   isActive(link.href)
                     ? "text-forest-950 bg-emerald-100/70 border border-emerald-300/80 shadow-xs"
                     : "text-gray-700 hover:text-forest-900 hover:bg-emerald-50/60"
@@ -124,9 +124,9 @@ export const Navbar: React.FC = () => {
             {/* Desktop Full Call Button */}
             <a
               href={getPhoneLink()}
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all group"
             >
-              <Phone className="w-4 h-4 text-emerald-300" />
+              <Phone className="w-4 h-4 text-emerald-300 group-hover:scale-110 anim-phone-wiggle transition-transform" />
               <span>Call Us: {businessInfo.primaryPhoneDisplay}</span>
             </a>
 

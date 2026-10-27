@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ServiceDetail } from "@/config/servicesData";
 import { getWhatsAppLink, getPhoneLink } from "@/config/businessInfo";
+import { ServiceWorkerCharacter } from "@/components/ServiceWorkerCharacter";
 import {
   Sparkles,
   Zap,
@@ -45,10 +46,15 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }) => {
+  const [isCardHovered, setIsCardHovered] = useState(false);
   const IconComponent = iconMap[service.iconName] || Settings;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+    <div
+      onMouseEnter={() => setIsCardHovered(true)}
+      onMouseLeave={() => setIsCardHovered(false)}
+      className="bg-white rounded-2xl border border-gray-200/90 hover:border-emerald-500/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
+    >
       <div className="p-6">
         {/* Top Category and Status Badge */}
         <div className="flex items-center justify-between gap-2 mb-4">
@@ -80,6 +86,16 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
           </div>
         </div>
 
+        {/* Animated Service Character Showcase (Housekeeping preview) */}
+        {service.slug === "housekeeping" && (
+          <div className="mb-4 pt-1">
+            <ServiceWorkerCharacter
+              serviceSlug={service.slug}
+              isCardHovered={isCardHovered}
+            />
+          </div>
+        )}
+
         {/* Short Description */}
         <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
           {service.shortDescription}
@@ -106,7 +122,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
         {onOpenModal ? (
           <button
             onClick={() => onOpenModal(service)}
-            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link cursor-pointer"
+            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link cursor-pointer hover:-translate-y-0.25 transition-transform"
           >
             <span>Learn More</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
@@ -114,7 +130,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
         ) : (
           <Link
             href={`/services/${service.slug}`}
-            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link"
+            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link hover:-translate-y-0.25 transition-transform"
           >
             <span>Learn More</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
@@ -124,10 +140,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
         <div className="flex items-center gap-1.5 shrink-0">
           <a
             href={getPhoneLink()}
-            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-900 text-white shadow-xs transition-colors inline-flex items-center gap-1.5 active:scale-95"
+            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-900 text-white shadow-xs hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all inline-flex items-center gap-1.5"
             title={`Call Smart Facility Services about ${service.title}`}
           >
-            <Phone className="w-3.5 h-3.5 text-emerald-300" />
+            <Phone className="w-3.5 h-3.5 text-emerald-300 anim-phone-wiggle" />
             <span>Call</span>
           </a>
 
@@ -135,7 +151,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
             href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs transition-colors inline-flex items-center gap-1.5 active:scale-95"
+            className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all inline-flex items-center gap-1.5"
             title={`Inquire about ${service.title} on WhatsApp`}
           >
             <MessageCircle className="w-3.5 h-3.5 text-white" />
