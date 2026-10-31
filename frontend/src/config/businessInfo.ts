@@ -76,7 +76,13 @@ export const businessInfo: BusinessConfig = {
     businessHours: "24/7 Support Available | Routine Shifts: 8:00 AM - 7:00 PM",
   },
   
-  additionalPhones: [],
+  additionalPhones: [
+    {
+      label: "Secondary Operations Helpline",
+      number: "9741048836",
+      display: "+91 97410 48836",
+    },
+  ],
 
   confirmedServiceAreas: [
     {
@@ -94,6 +100,14 @@ export const businessInfo: BusinessConfig = {
       postalCodes: ["560048"],
       landmarks: ["Hoodi Circle", "ITPL Main Road", "Ayyappa Nagar", "Kodigehalli Main Road"],
       description: "Comprehensive daily facility management, MEP maintenance, and housekeeping for residential layouts and apartments in Hoodi.",
+    },
+    {
+      neighborhood: "Mahadevapura",
+      city: "Bengaluru",
+      state: "Karnataka",
+      postalCodes: ["560048"],
+      landmarks: ["Outer Ring Road Corridor", "Decathlon Junction", "Bagmane World Technology Center"],
+      description: "Facility maintenance, technical operations, and specialized plant servicing for commercial and residential complexes in Mahadevapura.",
     },
     {
       neighborhood: "Garudachar Palya",

@@ -437,6 +437,36 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+
+        {/* Semantic Internal Linking Directory for 100% Crawlability & Local SEO */}
+        <div className="pt-6 border-t border-emerald-100 bg-emerald-50/50 rounded-2xl p-5 sm:p-6 text-xs text-gray-700 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-200/60 pb-3">
+            <div>
+              <h3 className="font-extrabold text-sm text-forest-950">
+                Complete Bengaluru Facility Services Directory
+              </h3>
+              <p className="text-[11px] text-gray-600">
+                Direct links to all 13 specialized facility maintenance programs across Bengaluru.
+              </p>
+            </div>
+            <span className="text-[11px] text-emerald-800 font-bold bg-white px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
+              Hoodi • Whitefield • Mahadevapura • Garudachar Palya
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 pt-1">
+            {servicesCatalogue.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="p-2.5 rounded-xl bg-white border border-emerald-200/80 hover:border-emerald-500 hover:text-forest-900 transition-all font-semibold flex items-center justify-between group shadow-2xs hover:shadow-xs"
+                title={`${s.title} in Whitefield, Hoodi, Mahadevapura & Bengaluru`}
+              >
+                <span className="truncate">{s.title}</span>
+                <span className="text-emerald-600 group-hover:translate-x-1 transition-transform ml-1 text-xs font-bold">&rarr;</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* 4. Interactive Live Location & Technology Map Section */}

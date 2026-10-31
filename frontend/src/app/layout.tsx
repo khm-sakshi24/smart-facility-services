@@ -15,22 +15,24 @@ import { businessInfo } from "@/config/businessInfo";
 export const metadata: Metadata = {
   metadataBase: new URL(businessInfo.siteUrl),
   title: {
-    default: "Smart Facility Services | Reliable Facility Support in Bengaluru",
-    template: "%s | Smart Facility Services",
+    default: "Smart Facility Services Bengaluru | Facility Management Whitefield, Hoodi & Mahadevapura",
+    template: "%s | Smart Facility Services Bengaluru",
   },
   description:
-    "Smart Facility Services provides facility support and maintenance solutions for residential communities, apartments, commercial properties and businesses in Hoodi, Garudachar Palya, Whitefield, and Bengaluru.",
+    "Smart Facility Services Bengaluru provides premier facility management in Whitefield, facility maintenance services in Hoodi, and facility maintenance in Mahadevapura. 24/7 housekeeping, MEP, STP & pump upkeep.",
   keywords: [
+    "Smart Facility Services Bengaluru",
+    "Facility management Whitefield",
+    "Facility maintenance services Hoodi",
+    "Facility maintenance Mahadevapura",
     "facility management Bengaluru",
-    "facility management services in Whitefield",
+    "facility maintenance services in Bengaluru",
     "housekeeping services in Bengaluru",
-    "general building maintenance Bengaluru",
-    "general maintenance Bengaluru",
     "electrical maintenance services in Whitefield",
     "plumbing services in Bengaluru",
     "STP ETP WTP operation and maintenance services",
     "water tank cleaning Bengaluru",
-    "Hoodi facility services",
+    "Garudachar Palya facility services",
   ],
   authors: [{ name: businessInfo.name }],
   creator: businessInfo.name,
@@ -50,19 +52,20 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: businessInfo.siteUrl,
-    title: "Smart Facility Services | Reliable Facility Support in Bengaluru",
+    title: "Smart Facility Services Bengaluru | Facility Management Whitefield, Hoodi & Mahadevapura",
     description:
-      "Reliable Facility Support. Every Day. Comprehensive facility operations, MEP maintenance, and building care for properties in Bengaluru.",
+      "Premier facility management in Whitefield, facility maintenance services in Hoodi, and facility maintenance in Mahadevapura. 24/7 housekeeping, MEP, and pump upkeep.",
     siteName: businessInfo.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Smart Facility Services | Facility Management Bengaluru",
+    title: "Smart Facility Services Bengaluru | Facility Management Whitefield",
     description:
-      "Reliable Facility Support. Every Day. Maintenance support for apartment communities in Whitefield, Hoodi & Bengaluru.",
+      "Premier facility management in Whitefield, facility maintenance services in Hoodi, and facility maintenance in Mahadevapura.",
+    images: [`${businessInfo.siteUrl}/images/logo.png`],
   },
   alternates: {
-    canonical: "/",
+    canonical: businessInfo.siteUrl,
   },
   icons: {
     icon: "/images/logo.png",

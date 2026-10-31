@@ -76,12 +76,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
 
         {/* Icon & Title */}
         <div className="flex items-start gap-4 mb-3">
-          <div className="w-12 h-12 rounded-xl bg-forest-50 border border-forest-100 flex items-center justify-center text-forest-800 shrink-0 group-hover:scale-105 group-hover:bg-forest-800 group-hover:text-white transition-all duration-300">
+          <Link
+            href={`/services/${service.slug}`}
+            className="w-12 h-12 rounded-xl bg-forest-50 border border-forest-100 flex items-center justify-center text-forest-800 shrink-0 group-hover:scale-105 group-hover:bg-forest-800 group-hover:text-white transition-all duration-300"
+            title={`View ${service.title} details`}
+          >
             <IconComponent className="w-6 h-6" />
-          </div>
+          </Link>
           <div>
             <h3 className="font-bold text-lg text-gray-900 group-hover:text-forest-900 transition-colors leading-snug">
-              {service.title}
+              <Link
+                href={`/services/${service.slug}`}
+                className="hover:text-emerald-700 hover:underline transition-colors"
+                title={`Learn more about ${service.title}`}
+              >
+                {service.title}
+              </Link>
             </h3>
           </div>
         </div>
@@ -117,23 +127,25 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
 
       {/* Action Footer */}
       <div className="px-5 py-3.5 bg-gray-50/90 border-t border-gray-100 flex items-center justify-between gap-2">
-        {onOpenModal ? (
-          <button
-            onClick={() => onOpenModal(service)}
-            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link cursor-pointer hover:-translate-y-0.25 transition-transform"
-          >
-            <span>Learn More</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-          </button>
-        ) : (
+        <div className="flex items-center gap-2">
           <Link
             href={`/services/${service.slug}`}
-            className="text-xs font-semibold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link hover:-translate-y-0.25 transition-transform"
+            className="text-xs font-bold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1 group/link hover:-translate-y-0.25 transition-transform"
+            title={`Explore full scope of ${service.title}`}
           >
             <span>Learn More</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
           </Link>
-        )}
+          {onOpenModal && (
+            <button
+              onClick={() => onOpenModal(service)}
+              className="text-[11px] text-gray-500 hover:text-emerald-700 underline underline-offset-2 hidden sm:inline cursor-pointer"
+              title="Quick modal preview"
+            >
+              (Preview)
+            </button>
+          )}
+        </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
           <a

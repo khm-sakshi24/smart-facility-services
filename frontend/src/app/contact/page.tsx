@@ -162,19 +162,32 @@ export default function ContactPage() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <span className="text-xs text-gray-500 font-medium block">Phone Call</span>
+                    <span className="text-xs text-gray-500 font-medium block">Phone Call Helplines</span>
                     <a
                       href={getPhoneLink()}
-                      className="text-base font-bold text-forest-900 hover:text-emerald-700 transition-colors"
+                      className="text-base font-bold text-forest-900 hover:text-emerald-700 transition-colors block"
                     >
-                      {businessInfo.contact.phoneFormatted || businessInfo.contact.phone}
+                      Primary: {businessInfo.contact.phoneFormatted || businessInfo.contact.phone}
                     </a>
-                    <div className="mt-1">
+                    <a
+                      href="tel:+919741048836"
+                      className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 transition-colors block mt-0.5"
+                    >
+                      Additional: +91 97410 48836
+                    </a>
+                    <div className="mt-1 flex items-center gap-3">
                       <a
                         href={getPhoneLink()}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
                       >
-                        <span>Call directly</span>
+                        <span>Call Primary</span>
+                        <span>&rarr;</span>
+                      </a>
+                      <a
+                        href="tel:+919741048836"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                      >
+                        <span>Call Additional</span>
                         <span>&rarr;</span>
                       </a>
                     </div>

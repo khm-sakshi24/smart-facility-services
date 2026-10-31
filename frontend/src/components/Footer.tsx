@@ -87,20 +87,21 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Key Services */}
-          <div className="space-y-4">
+          {/* Key Services: All 13 Core Facility Disciplines for Complete Internal Crawlability */}
+          <div className="space-y-4 lg:col-span-1">
             <h3 className="text-sm font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
-              Featured Services
+              All 13 Facility Disciplines
             </h3>
-            <ul className="space-y-2.5 text-sm">
-              {servicesCatalogue.slice(0, 6).map((service) => (
+            <ul className="space-y-1.5 text-xs">
+              {servicesCatalogue.map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="hover:text-emerald-300 transition-colors flex items-center justify-between"
+                    className="hover:text-emerald-300 transition-colors flex items-center justify-between py-0.5 group"
+                    title={`${service.title} in Bengaluru`}
                   >
-                    <span>{service.title}</span>
-                    <span className="text-xs text-emerald-500/70">&rarr;</span>
+                    <span className="truncate group-hover:underline">{service.title}</span>
+                    <span className="text-[10px] text-emerald-500/70 shrink-0 ml-1">&rarr;</span>
                   </Link>
                 </li>
               ))}
@@ -116,12 +117,18 @@ export const Footer: React.FC = () => {
               <div className="flex items-start space-x-3">
                 <Phone className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
                 <div>
-                  <span className="text-xs text-gray-400 block">Phone Call</span>
+                  <span className="text-xs text-gray-400 block">Phone Helplines</span>
                   <a
                     href={getPhoneLink()}
-                    className="font-bold text-white hover:text-emerald-300 transition-colors"
+                    className="font-bold text-white hover:text-emerald-300 transition-colors block"
                   >
-                    {businessInfo.primaryPhoneDisplay}
+                    Primary: {businessInfo.primaryPhoneDisplay}
+                  </a>
+                  <a
+                    href="tel:+919741048836"
+                    className="text-xs text-emerald-300 hover:text-white transition-colors block mt-0.5"
+                  >
+                    Additional: +91 97410 48836
                   </a>
                 </div>
               </div>
@@ -144,7 +151,7 @@ export const Footer: React.FC = () => {
               <div className="flex items-start space-x-3">
                 <Mail className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
                 <div>
-                  <span className="text-xs text-gray-400 block">Official Email</span>
+                  <span className="text-xs text-gray-400 block">Official Support Email</span>
                   <a
                     href={getEmailLink()}
                     className="font-bold text-white hover:text-emerald-300 transition-colors break-all text-xs sm:text-sm"
@@ -157,8 +164,8 @@ export const Footer: React.FC = () => {
               <div className="flex items-start space-x-3 pt-2">
                 <MapPin className="w-4 h-4 text-emerald-400 mt-1 shrink-0" />
                 <div className="text-xs text-gray-400">
-                  <strong className="text-gray-200 block">Confirmed Service Corridors:</strong>
-                  <span>Hoodi, Garudachar Palya, Whitefield &amp; Bengaluru, Karnataka</span>
+                  <strong className="text-gray-200 block">Verified Service Areas:</strong>
+                  <span>Bengaluru, Hoodi, Whitefield, Mahadevapura &amp; Garudachar Palya, Karnataka</span>
                 </div>
               </div>
             </div>
