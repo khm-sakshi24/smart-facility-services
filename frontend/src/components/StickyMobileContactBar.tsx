@@ -2,17 +2,24 @@
 
 import React from "react";
 import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { Phone, MessageCircle, Mail } from "lucide-react";
 
 export const StickyMobileContactBar: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-emerald-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] sm:hidden py-2 px-3 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
       <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
         {/* Call Now */}
         <a
           href={getPhoneLink()}
-          className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-xs active:scale-95 transition-transform"
-          aria-label={`Call Smart Facility Services at ${businessInfo.primaryPhoneDisplay}`}
+          onClick={(e) => {
+            e.preventDefault();
+            openCallModal();
+          }}
+          className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-xs active:scale-95 transition-transform cursor-pointer"
+          aria-label="Call Smart Facility Services (Select Helpline or Gowda)"
         >
           <Phone className="w-3.5 h-3.5 text-emerald-300" />
           <span>Call</span>
@@ -23,8 +30,12 @@ export const StickyMobileContactBar: React.FC = () => {
           href={getWhatsAppLink()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs active:scale-95 transition-transform"
-          aria-label="Chat on WhatsApp"
+          onClick={(e) => {
+            e.preventDefault();
+            openWhatsAppModal();
+          }}
+          className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs active:scale-95 transition-transform cursor-pointer"
+          aria-label="Chat on WhatsApp (Select Main Office or Gowda)"
         >
           <MessageCircle className="w-3.5 h-3.5 text-white" />
           <span>WhatsApp</span>

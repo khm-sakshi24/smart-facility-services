@@ -19,6 +19,9 @@ export interface BusinessConfig {
   contactPerson?: string;
   primaryPhone: string;
   primaryPhoneDisplay: string;
+  secondaryPhone: string;
+  secondaryPhoneDisplay: string;
+  secondaryContactName: string;
   whatsappNumber: string;
   email: string;
   logoUrl: string;
@@ -62,6 +65,9 @@ export const businessInfo: BusinessConfig = {
   // Official Contact Details
   primaryPhone: "9663846126",
   primaryPhoneDisplay: "+91 96638 46126",
+  secondaryPhone: "9741048836",
+  secondaryPhoneDisplay: "+91 97410 48836",
+  secondaryContactName: "Gowda",
   whatsappNumber: "919663846126",
   email: "Supportsmartfacility26@gmail.com",
   logoUrl: "/images/logo.png",
@@ -78,7 +84,7 @@ export const businessInfo: BusinessConfig = {
   
   additionalPhones: [
     {
-      label: "Secondary Operations Helpline",
+      label: "Gowda (Operations Lead)",
       number: "9741048836",
       display: "+91 97410 48836",
     },
@@ -171,16 +177,16 @@ export const businessInfo: BusinessConfig = {
 /**
  * Utility helper to generate official WhatsApp click-to-chat links
  */
-export function getWhatsAppLink(prefilledMessage?: string): string {
+export function getWhatsAppLink(prefilledMessage?: string, phone: string = businessInfo.whatsappNumber): string {
   const msg = prefilledMessage || "Hello Smart Facility Services, I would like to know more about your 24/7 facility services.";
-  return `https://wa.me/${businessInfo.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
 }
 
 /**
  * Utility helper for click-to-call link
  */
-export function getPhoneLink(): string {
-  return `tel:+91${businessInfo.primaryPhone}`;
+export function getPhoneLink(phone: string = businessInfo.primaryPhone): string {
+  return `tel:+91${phone}`;
 }
 
 /**

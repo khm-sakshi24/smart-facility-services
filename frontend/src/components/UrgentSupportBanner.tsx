@@ -2,9 +2,11 @@
 
 import React from "react";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { Phone, MessageCircle, AlertCircle, Clock, ShieldAlert } from "lucide-react";
 
 export const UrgentSupportBanner: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   return (
     <div className="bg-gradient-to-r from-forest-950 via-forest-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 border border-emerald-500/30 shadow-xl relative overflow-hidden">
       {/* Background glow element */}
@@ -27,6 +29,10 @@ export const UrgentSupportBanner: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal("Urgent Facility Emergency");
+            }}
             className="px-6 py-3.5 rounded-xl bg-white hover:bg-emerald-50 text-forest-950 font-extrabold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
           >
             <Phone className="w-4 h-4 text-forest-800" />
@@ -35,6 +41,13 @@ export const UrgentSupportBanner: React.FC = () => {
 
           <a
             href={getWhatsAppLink("Hello Smart Facility Services, I have an urgent facility maintenance inquiry for my property.")}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsAppModal(
+                "Hello Smart Facility Services, I have an urgent facility maintenance inquiry for my property.",
+                "Urgent Facility Support"
+              );
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"

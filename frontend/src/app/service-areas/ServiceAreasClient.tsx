@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { useContactModal } from "@/components/ContactModalContext";
 import { ServiceAreaChecker } from "@/components/ServiceAreaChecker";
 import { InteractiveMapSection } from "@/components/InteractiveMapSection";
 import { LocationMapModal } from "@/components/LocationMapModal";
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 
 export const ServiceAreasClient: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   return (
@@ -114,6 +116,10 @@ export const ServiceAreasClient: React.FC = () => {
                 <div className="flex items-center justify-between gap-3 pt-1">
                   <a
                     href={getPhoneLink()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openCallModal(`${area.neighborhood} Operations`);
+                    }}
                     className="text-xs font-bold text-forest-800 hover:text-forest-950 inline-flex items-center gap-1.5"
                   >
                     <Phone className="w-3.5 h-3.5 text-emerald-600" />
@@ -124,6 +130,13 @@ export const ServiceAreasClient: React.FC = () => {
                     href={getWhatsAppLink(
                       `Hello Smart Facility Services, I would like to inquire about services in ${area.neighborhood}.`
                     )}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openWhatsAppModal(
+                        `Hello Smart Facility Services, I would like to inquire about services in ${area.neighborhood}.`,
+                        area.neighborhood
+                      );
+                    }}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs font-bold px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs transition-colors inline-flex items-center gap-1.5"

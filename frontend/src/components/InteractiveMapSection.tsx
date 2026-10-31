@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import {
   MapPin,
   ExternalLink,
@@ -152,6 +153,7 @@ interface InteractiveMapSectionProps {
 export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
   onOpenLocationModal,
 }) => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [selectedTab, setSelectedTab] = useState<MapTab>(mapTabs[0]);
   const [activeTech, setActiveTech] = useState<TechPillar | null>(null);
 
@@ -281,6 +283,10 @@ export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
           <div className="pt-4 border-t border-gray-200 grid grid-cols-2 gap-2.5">
             <a
               href={getPhoneLink()}
+              onClick={(e) => {
+                e.preventDefault();
+                openCallModal(`${selectedTab.name} Dispatch Hub`);
+              }}
               className="py-2.5 px-3 rounded-xl bg-forest-800 hover:bg-forest-900 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-xs transition-transform flex items-center justify-center gap-1.5 text-center"
             >
               <Phone className="w-3.5 h-3.5 text-emerald-300" />
@@ -291,6 +297,13 @@ export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
               href={getWhatsAppLink(
                 `Hello Smart Facility Services, I would like to inquire about facility services in ${selectedTab.name}.`
               )}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsAppModal(
+                  `Hello Smart Facility Services, I would like to inquire about facility services in ${selectedTab.name}.`,
+                  `${selectedTab.name} Hub`
+                );
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-xs transition-transform flex items-center justify-center gap-1.5 text-center"
@@ -401,6 +414,10 @@ export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
             <div className="pt-3 border-t border-gray-100 grid grid-cols-2 gap-2.5">
               <a
                 href={getPhoneLink()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openCallModal(activeTech.title);
+                }}
                 className="py-2.5 px-3 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform text-center"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-300" />
@@ -411,6 +428,13 @@ export const InteractiveMapSection: React.FC<InteractiveMapSectionProps> = ({
                 href={getWhatsAppLink(
                   `Hello Smart Facility Services, I would like to inquire about implementing ${activeTech.title} for my building.`
                 )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsAppModal(
+                    `Hello Smart Facility Services, I would like to inquire about implementing ${activeTech.title} for my building.`,
+                    activeTech.title
+                  );
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform text-center"

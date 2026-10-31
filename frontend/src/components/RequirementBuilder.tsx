@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { businessInfo, getWhatsAppLink, getPhoneLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import {
   Building2,
   MapPin,
@@ -42,6 +43,7 @@ const availableServices = [
 ];
 
 export const RequirementBuilder: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [propertyType, setPropertyType] = useState(propertyTypes[0]);
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [selectedServices, setSelectedServices] = useState<string[]>([
@@ -170,6 +172,10 @@ export const RequirementBuilder: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <a
             href={getWhatsAppLink(generateWhatsAppMessage())}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsAppModal(generateWhatsAppMessage(), "Custom Requirement Checklist");
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
@@ -180,6 +186,10 @@ export const RequirementBuilder: React.FC = () => {
 
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal("Operations Team");
+            }}
             className="px-5 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
           >
             <Phone className="w-4 h-4 text-emerald-300" />

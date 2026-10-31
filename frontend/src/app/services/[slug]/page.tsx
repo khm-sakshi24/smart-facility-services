@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesCatalogue, ServiceDetail } from "@/config/servicesData";
-import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
+import { businessInfo } from "@/config/businessInfo";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
+import { ServiceDetailContactCtas } from "@/components/ServiceDetailContactCtas";
 import {
   CheckCircle,
   Clock,
@@ -15,9 +16,6 @@ import {
   Layers,
   ChevronRight,
   CheckCircle2,
-  Phone,
-  MessageCircle,
-  Mail,
 } from "lucide-react";
 
 interface ServicePageProps {
@@ -129,32 +127,7 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
         )}
 
         {/* Direct Contact CTAs */}
-        <div className="pt-2 flex flex-wrap items-center gap-3">
-          <a
-            href={getPhoneLink()}
-            className="px-6 py-3 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-sm shadow hover:shadow-md transition-all flex items-center gap-2"
-          >
-            <Phone className="w-4 h-4 text-emerald-300" />
-            <span>Call Now ({businessInfo.primaryPhoneDisplay})</span>
-          </a>
-
-          <a
-            href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow hover:shadow-md transition-all flex items-center gap-2"
-          >
-            <MessageCircle className="w-4 h-4" />
-            <span>Chat on WhatsApp</span>
-          </a>
-
-          <Link
-            href="/contact"
-            className="px-6 py-3 rounded-xl bg-white hover:bg-gray-50 text-gray-800 font-semibold text-sm border border-gray-300 transition-colors"
-          >
-            Contact Operations
-          </Link>
-        </div>
+        <ServiceDetailContactCtas serviceTitle={service.title} variant="hero" />
       </div>
 
       {/* Typical Use Cases & Scope of Work */}
@@ -247,31 +220,7 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
             Contact Smart Facility Services at <strong>{businessInfo.primaryPhoneDisplay}</strong> or <strong>{businessInfo.email}</strong> to discuss property requirements.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
-          <a
-            href={getPhoneLink()}
-            className="px-5 py-2.5 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-xs sm:text-sm shadow flex items-center gap-1.5 transition-colors"
-          >
-            <Phone className="w-4 h-4 text-forest-800" />
-            <span>Call Now</span>
-          </a>
-          <a
-            href={getWhatsAppLink(`Hello Smart Facility Services, I would like to know more about ${service.title}.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow flex items-center gap-1.5 transition-colors"
-          >
-            <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp Us</span>
-          </a>
-          <a
-            href={getEmailLink(`Enquiry about ${service.title}`)}
-            className="px-5 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs sm:text-sm border border-emerald-500/40 shadow flex items-center gap-1.5 transition-colors"
-          >
-            <Mail className="w-4 h-4 text-emerald-300" />
-            <span>Email Us</span>
-          </a>
-        </div>
+        <ServiceDetailContactCtas serviceTitle={service.title} variant="bottom" />
       </div>
 
       {/* Related Services */}

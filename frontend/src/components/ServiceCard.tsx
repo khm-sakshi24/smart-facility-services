@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ServiceDetail } from "@/config/servicesData";
 import { getWhatsAppLink, getPhoneLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { ServiceWorkerCharacter } from "@/components/ServiceWorkerCharacter";
 import {
   Sparkles,
@@ -46,6 +47,7 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }) => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [isCardHovered, setIsCardHovered] = useState(false);
   const IconComponent = iconMap[service.iconName] || Settings;
 
@@ -150,6 +152,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
         <div className="flex items-center gap-1.5 shrink-0">
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal(service.title);
+            }}
             className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-900 text-white shadow-xs hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all inline-flex items-center gap-1.5"
             title={`Call Smart Facility Services about ${service.title}`}
           >
@@ -159,6 +165,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onOpenModal }
 
           <a
             href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsAppModal(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`, service.title);
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all inline-flex items-center gap-1.5"

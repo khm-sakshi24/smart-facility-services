@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageContext";
+import { useContactModal } from "@/components/ContactModalContext";
 import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
 import { servicesCatalogue, ServiceDetail } from "@/config/servicesData";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -73,6 +74,7 @@ const categories = [
 
 export default function HomePage() {
   const { t } = useLanguage();
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("All Services");
@@ -243,6 +245,10 @@ export default function HomePage() {
               <div className="sm:hidden grid grid-cols-2 gap-2.5 max-w-xs mx-auto">
                 <a
                   href={getPhoneLink()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openCallModal();
+                  }}
                   className="py-3 px-3 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1.5 border border-emerald-700/60"
                 >
                   <Phone className="w-3.5 h-3.5 text-emerald-300" />
@@ -251,6 +257,10 @@ export default function HomePage() {
 
                 <a
                   href={getWhatsAppLink()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openWhatsAppModal();
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1.5"
@@ -275,6 +285,10 @@ export default function HomePage() {
               <div className="hidden sm:flex items-center justify-center gap-3.5">
                 <a
                   href={getPhoneLink()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openCallModal();
+                  }}
                   className="px-7 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 border border-emerald-700/60 group"
                 >
                   <Phone className="w-4 h-4 text-emerald-300 group-hover:scale-110 transition-transform" />
@@ -283,6 +297,10 @@ export default function HomePage() {
 
                 <a
                   href={getWhatsAppLink()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openWhatsAppModal();
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
@@ -342,6 +360,10 @@ export default function HomePage() {
 
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal("24/7 Response Helpline");
+            }}
             className="flex items-center gap-3 p-2.5 pt-3 sm:pt-2.5 sm:pl-4 rounded-xl hover:bg-emerald-50/60 active:scale-95 transition-all group cursor-pointer"
             title="Call 24/7 emergency response"
           >
@@ -570,6 +592,10 @@ export default function HomePage() {
           {/* Step 02: Interactive direct call */}
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal("Direct Operations Helpline");
+            }}
             className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
               processReveal.isInView ? "is-revealed stagger-2" : ""
             }`}
@@ -602,6 +628,13 @@ export default function HomePage() {
             href={getWhatsAppLink(
               "Hello Smart Facility Services, I would like to schedule a property & scope review for our building."
             )}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsAppModal(
+                "Hello Smart Facility Services, I would like to schedule a property & scope review for our building.",
+                "Property & Scope Review"
+              );
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className={`bg-white p-5 rounded-2xl border border-gray-200 shadow-2xs hover:border-emerald-500 hover:shadow-lg active:scale-95 transition-all space-y-3 flex flex-col justify-between group cursor-pointer scroll-reveal ${
@@ -687,6 +720,10 @@ export default function HomePage() {
             <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4">
               <a
                 href={getPhoneLink()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openCallModal("Operations Team");
+                }}
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-forest-950 font-bold text-xs sm:text-sm shadow hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-forest-800" />
@@ -695,6 +732,10 @@ export default function HomePage() {
 
               <a
                 href={getWhatsAppLink()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsAppModal();
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-xs sm:text-sm shadow transition-colors flex items-center justify-center gap-2"

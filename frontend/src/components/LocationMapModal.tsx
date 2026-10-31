@@ -2,6 +2,7 @@
 
 import React from "react";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import {
   MapPin,
   X,
@@ -73,6 +74,7 @@ interface LocationMapModalProps {
 }
 
 export const LocationMapModal: React.FC<LocationMapModalProps> = ({ locationName, onClose }) => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   if (!locationName) return null;
 
   const key = locationName.toLowerCase().trim();
@@ -197,6 +199,10 @@ export const LocationMapModal: React.FC<LocationMapModalProps> = ({ locationName
           <div className="grid grid-cols-2 gap-2.5 pt-2">
             <a
               href={getPhoneLink()}
+              onClick={(e) => {
+                e.preventDefault();
+                openCallModal(`${details.name} Team`);
+              }}
               className="py-3 px-4 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 text-center"
             >
               <Phone className="w-4 h-4 text-emerald-300" />
@@ -205,6 +211,13 @@ export const LocationMapModal: React.FC<LocationMapModalProps> = ({ locationName
 
             <a
               href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about facility management services in ${details.name}.`)}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsAppModal(
+                  `Hello Smart Facility Services, I would like to inquire about facility management services in ${details.name}.`,
+                  details.name
+                );
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 text-center"

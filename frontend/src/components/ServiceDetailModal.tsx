@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ServiceDetail } from "@/config/servicesData";
 import { getPhoneLink, getWhatsAppLink, businessInfo } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { X, CheckCircle, Phone, MessageCircle, ArrowRight, ShieldAlert, Layers } from "lucide-react";
 
 interface ServiceDetailModalProps {
@@ -13,6 +14,7 @@ interface ServiceDetailModalProps {
 
 export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { openCallModal, openWhatsAppModal } = useContactModal();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -130,6 +132,10 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service,
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <a
               href={getPhoneLink()}
+              onClick={(e) => {
+                e.preventDefault();
+                openCallModal(service.title);
+              }}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-semibold text-xs shadow transition-colors active:scale-95"
             >
               <Phone className="w-3.5 h-3.5 text-emerald-300" />
@@ -137,6 +143,10 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({ service,
             </a>
             <a
               href={getWhatsAppLink(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`)}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsAppModal(`Hello Smart Facility Services, I would like to inquire about ${service.title}.`, service.title);
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow transition-colors active:scale-95"

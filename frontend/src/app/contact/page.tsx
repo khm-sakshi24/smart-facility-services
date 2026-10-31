@@ -11,6 +11,7 @@ import {
   getWhatsAppLink,
   getEmailLink,
 } from "@/config/businessInfo";
+import { useContactModal } from "@/components/ContactModalContext";
 import { servicesCatalogue } from "@/config/servicesData";
 import {
   Phone,
@@ -28,6 +29,7 @@ import {
 } from "lucide-react";
 
 export default function ContactPage() {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -167,27 +169,29 @@ export default function ContactPage() {
                       href={getPhoneLink()}
                       className="text-base font-bold text-forest-900 hover:text-emerald-700 transition-colors block"
                     >
-                      Primary: {businessInfo.contact.phoneFormatted || businessInfo.contact.phone}
+                      Central Helpline: {businessInfo.contact.phoneFormatted || businessInfo.contact.phone}
                     </a>
                     <a
-                      href="tel:+919741048836"
-                      className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 transition-colors block mt-0.5"
+                      href={`tel:+91${businessInfo.secondaryPhone}`}
+                      className="text-sm font-bold text-emerald-800 hover:text-emerald-950 transition-colors block mt-1"
                     >
-                      Additional: +91 97410 48836
+                      Gowda (Lead): {businessInfo.secondaryPhoneDisplay}
                     </a>
-                    <div className="mt-1 flex items-center gap-3">
+                    <div className="mt-2 flex flex-wrap items-center gap-2 sm:gap-3">
                       <a
                         href={getPhoneLink()}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md"
                       >
-                        <span>Call Primary</span>
+                        <Phone className="w-3 h-3 text-emerald-600" />
+                        <span>Call Central</span>
                         <span>&rarr;</span>
                       </a>
                       <a
-                        href="tel:+919741048836"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                        href={`tel:+91${businessInfo.secondaryPhone}`}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md"
                       >
-                        <span>Call Additional</span>
+                        <Phone className="w-3 h-3 text-emerald-600" />
+                        <span>Call Gowda</span>
                         <span>&rarr;</span>
                       </a>
                     </div>
@@ -202,23 +206,42 @@ export default function ContactPage() {
                     <MessageCircle className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <span className="text-xs text-gray-500 font-medium block">WhatsApp Chat</span>
+                    <span className="text-xs text-gray-500 font-medium block">WhatsApp Support Channels</span>
                     <a
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-base font-bold text-forest-900 hover:text-emerald-700 transition-colors"
+                      className="text-base font-bold text-forest-900 hover:text-emerald-700 transition-colors block"
                     >
-                      {businessInfo.contact.phoneFormatted || businessInfo.contact.phone}
+                      Central Helpline: {businessInfo.primaryPhoneDisplay}
                     </a>
-                    <div className="mt-1">
+                    <a
+                      href={getWhatsAppLink("", businessInfo.secondaryPhone)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold text-emerald-800 hover:text-emerald-950 transition-colors block mt-1"
+                    >
+                      Gowda (Lead): {businessInfo.secondaryPhoneDisplay}
+                    </a>
+                    <div className="mt-2 flex flex-wrap items-center gap-2 sm:gap-3">
                       <a
                         href={getWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md"
                       >
-                        <span>Open WhatsApp chat</span>
+                        <MessageCircle className="w-3 h-3 text-emerald-600" />
+                        <span>Chat Central</span>
+                        <span>&rarr;</span>
+                      </a>
+                      <a
+                        href={getWhatsAppLink("", businessInfo.secondaryPhone)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md"
+                      >
+                        <MessageCircle className="w-3 h-3 text-emerald-600" />
+                        <span>Chat Gowda</span>
                         <span>&rarr;</span>
                       </a>
                     </div>
@@ -294,6 +317,10 @@ export default function ContactPage() {
             </p>
             <a
               href={getWhatsAppLink("Hello Smart Facility Services, I would like to discuss facility services for my property.")}
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsAppModal("Hello Smart Facility Services, I would like to discuss facility services for my property.", "General Inquiry");
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-white hover:bg-emerald-50 text-forest-950 font-bold text-sm shadow transition-colors"

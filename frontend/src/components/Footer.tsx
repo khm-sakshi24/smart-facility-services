@@ -4,10 +4,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { servicesCatalogue } from "@/config/servicesData";
 import { MapPin, Phone, MessageCircle, Mail } from "lucide-react";
 
 export const Footer: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   return (
     <footer className="bg-forest-950 text-gray-300 border-t border-forest-900 pb-20 md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
@@ -122,13 +124,13 @@ export const Footer: React.FC = () => {
                     href={getPhoneLink()}
                     className="font-bold text-white hover:text-emerald-300 transition-colors block"
                   >
-                    Primary: {businessInfo.primaryPhoneDisplay}
+                    Central Helpline: {businessInfo.primaryPhoneDisplay}
                   </a>
                   <a
-                    href="tel:+919741048836"
-                    className="text-xs text-emerald-300 hover:text-white transition-colors block mt-0.5"
+                    href={`tel:+91${businessInfo.secondaryPhone}`}
+                    className="text-xs text-emerald-300 hover:text-white transition-colors block mt-0.5 font-medium"
                   >
-                    Additional: +91 97410 48836
+                    Gowda (Lead): {businessInfo.secondaryPhoneDisplay}
                   </a>
                 </div>
               </div>
@@ -139,6 +141,10 @@ export const Footer: React.FC = () => {
                   <span className="text-xs text-gray-400 block">WhatsApp Support</span>
                   <a
                     href={getWhatsAppLink()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openWhatsAppModal();
+                    }}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors"

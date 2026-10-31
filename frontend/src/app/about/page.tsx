@@ -130,32 +130,43 @@ export default function AboutPage() {
         <div>
           <h3 className="text-2xl font-bold">Connect With Our Team</h3>
           <p className="text-sm text-emerald-200 mt-1">
-            Speak directly with Smart Facility Services at <strong>{businessInfo.primaryPhoneDisplay}</strong> or email <strong>{businessInfo.email}</strong>.
+            Speak directly with Smart Facility Services at <strong>{businessInfo.primaryPhoneDisplay}</strong> or <strong>{businessInfo.secondaryPhoneDisplay} (Gowda)</strong>, or email <strong>{businessInfo.email}</strong>.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           <a
             href={getPhoneLink()}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-sm shadow flex items-center gap-2 transition-colors"
+            className="px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-forest-950 font-bold text-xs sm:text-sm shadow flex items-center gap-2 transition-colors"
+            title="Call Central Operations Helpline"
           >
             <Phone className="w-4 h-4 text-forest-800" />
-            <span>Call Us</span>
+            <span>Call Helpline</span>
+          </a>
+          <a
+            href={`tel:+91${businessInfo.secondaryPhone}`}
+            className="px-5 py-3 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs sm:text-sm border border-emerald-500/40 shadow flex items-center gap-2 transition-colors"
+            title="Call Gowda (Operations Lead)"
+          >
+            <Phone className="w-4 h-4 text-emerald-300" />
+            <span>Call Gowda</span>
           </a>
           <a
             href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow flex items-center gap-2 transition-colors"
+            className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow flex items-center gap-2 transition-colors"
+            title="Chat with Smart Facility Services on WhatsApp"
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp</span>
           </a>
           <a
             href={getEmailLink()}
-            className="px-6 py-3 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-sm border border-emerald-500/40 shadow flex items-center gap-2 transition-colors"
+            className="px-5 py-3 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs sm:text-sm border border-emerald-500/40 shadow flex items-center gap-2 transition-colors"
+            title="Send an Email"
           >
             <Mail className="w-4 h-4 text-emerald-300" />
-            <span>Email Us</span>
+            <span>Email</span>
           </a>
         </div>
       </div>

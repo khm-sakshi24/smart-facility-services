@@ -9,6 +9,7 @@ import {
   getWhatsAppLink,
   getEmailLink,
 } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { servicesCatalogue, ServiceDetail } from "@/config/servicesData";
 import {
   MessageSquare,
@@ -69,6 +70,7 @@ const welcomeMessage: ChatMessage = {
 };
 
 export const SmartAssistant: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([welcomeMessage]);
   const [inputValue, setInputValue] = useState("");
@@ -904,6 +906,10 @@ export const SmartAssistant: React.FC = () => {
                       {msg.actionLinks.call && (
                         <a
                           href={getPhoneLink()}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            openCallModal("Facility Assistant");
+                          }}
                           className="inline-flex items-center gap-1 bg-forest-800 hover:bg-forest-900 active:scale-95 text-white text-[11px] font-extrabold px-2.5 py-1.5 rounded-lg transition-all shadow-2xs"
                         >
                           <Phone className="w-3 h-3 text-emerald-300" />
@@ -914,6 +920,10 @@ export const SmartAssistant: React.FC = () => {
                       {msg.actionLinks.whatsapp && (
                         <a
                           href={getWhatsAppLink(msg.actionLinks.whatsapp)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            openWhatsAppModal(msg.actionLinks?.whatsapp, "Facility Assistant");
+                          }}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-[11px] font-extrabold px-2.5 py-1.5 rounded-lg transition-all shadow-2xs"

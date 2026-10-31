@@ -140,19 +140,28 @@ export default function ProcessPage() {
         <p className="text-sm text-emerald-100 max-w-xl mx-auto leading-relaxed">
           Contact Smart Facility Services directly by phone or WhatsApp to discuss your property maintenance needs today.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <a
             href={getPhoneLink()}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white text-forest-950 font-bold text-sm shadow hover:bg-gray-100 transition-colors w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-forest-950 font-bold text-sm shadow hover:bg-gray-100 transition-colors w-full sm:w-auto"
+            title="Call Central Helpline"
           >
             <Phone className="w-4 h-4 text-forest-800" />
-            <span>Call Now: {businessInfo.contact.phoneFormatted}</span>
+            <span>Call Helpline: {businessInfo.contact.phoneFormatted}</span>
+          </a>
+          <a
+            href={`tel:+91${businessInfo.secondaryPhone}`}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-bold text-sm border border-emerald-500/40 shadow transition-colors w-full sm:w-auto"
+            title="Call Gowda (Lead)"
+          >
+            <Phone className="w-4 h-4 text-emerald-300" />
+            <span>Call Gowda: {businessInfo.secondaryPhoneDisplay}</span>
           </a>
           <a
             href={getWhatsAppLink("Hello Smart Facility Services, I would like to discuss Step 1 of your facility services work process.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-sm shadow transition-colors w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-sm shadow transition-colors w-full sm:w-auto"
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp Us</span>

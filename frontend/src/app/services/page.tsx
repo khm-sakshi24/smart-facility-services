@@ -8,6 +8,7 @@ import { ServiceDetailModal } from "@/components/ServiceDetailModal";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StructuredData } from "@/components/StructuredData";
 import { businessInfo, getPhoneLink, getWhatsAppLink, getEmailLink } from "@/config/businessInfo";
+import { useContactModal } from "@/components/ContactModalContext";
 import { Phone, MessageCircle, Mail, Search, Clock, Sparkles } from "lucide-react";
 
 const categories = [
@@ -19,6 +20,7 @@ const categories = [
 ];
 
 export default function ServicesPage() {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All Services");
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,6 +91,10 @@ export default function ServicesPage() {
         <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto">
           <a
             href={getPhoneLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openCallModal();
+            }}
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white font-bold text-xs shadow-xs transition-colors"
           >
             <Phone className="w-3.5 h-3.5 text-emerald-300" />
@@ -96,6 +102,10 @@ export default function ServicesPage() {
           </a>
           <a
             href={getWhatsAppLink()}
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsAppModal();
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-xs transition-colors"

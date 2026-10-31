@@ -10,6 +10,8 @@ import { StickyMobileContactBar } from "@/components/StickyMobileContactBar";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
 import { SmartAssistant } from "@/components/SmartAssistant";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
+import { ContactModalProvider } from "@/components/ContactModalContext";
+import { ContactChoiceModal } from "@/components/ContactChoiceModal";
 import { businessInfo } from "@/config/businessInfo";
 
 export const metadata: Metadata = {
@@ -83,15 +85,18 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-sans selection:bg-emerald-200 selection:text-forest-950 pb-20 sm:pb-0">
         <ScrollProgressBar />
         <LanguageProvider>
-          <StructuredData type="LocalBusiness" />
-          <WelcomeAnnouncement />
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <StickyMobileContactBar />
-          <FloatingWhatsAppButton />
-          <SmartAssistant />
-          <ScrollToTopButton />
+          <ContactModalProvider>
+            <StructuredData type="LocalBusiness" />
+            <WelcomeAnnouncement />
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <StickyMobileContactBar />
+            <FloatingWhatsAppButton />
+            <SmartAssistant />
+            <ScrollToTopButton />
+            <ContactChoiceModal />
+          </ContactModalProvider>
         </LanguageProvider>
       </body>
     </html>

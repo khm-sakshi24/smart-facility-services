@@ -5,9 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { businessInfo, getPhoneLink, getWhatsAppLink } from "@/config/businessInfo";
+import { useContactModal } from "./ContactModalContext";
 import { Menu, X, Phone, Mail, MessageCircle, Clock } from "lucide-react";
 
 export const Navbar: React.FC = () => {
+  const { openCallModal, openWhatsAppModal } = useContactModal();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCallPopped, setIsCallPopped] = useState(false);
   const callPopoverRef = useRef<HTMLDivElement>(null);
@@ -124,19 +126,27 @@ export const Navbar: React.FC = () => {
             {/* Desktop Full Call Button */}
             <a
               href={getPhoneLink()}
-              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all group"
+              onClick={(e) => {
+                e.preventDefault();
+                openCallModal();
+              }}
+              className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-forest-800 to-emerald-700 hover:from-forest-900 hover:to-emerald-800 text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all group cursor-pointer"
             >
               <Phone className="w-4 h-4 text-emerald-300 group-hover:scale-110 anim-phone-wiggle transition-transform" />
-              <span>Call Us: {businessInfo.primaryPhoneDisplay}</span>
+              <span>Call Helplines: {businessInfo.primaryPhoneDisplay}</span>
             </a>
 
-            {/* Mobile Animated Compact Call Button: Directly dials with spring animation on touch! */}
+            {/* Mobile Animated Compact Call Button: Directly dials or opens choice on touch! */}
             <div className="relative sm:hidden">
               <a
                 href={getPhoneLink()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openCallModal();
+                }}
                 aria-label={`Call Smart Facility Services at ${businessInfo.primaryPhoneDisplay}`}
-                className="w-11 h-11 rounded-full bg-forest-800 hover:bg-forest-900 active:bg-emerald-700 text-white flex items-center justify-center shadow-lg border-2 border-emerald-400/60 transition-transform duration-200 active:scale-125 relative"
-                title={`Call Us: ${businessInfo.primaryPhoneDisplay}`}
+                className="w-11 h-11 rounded-full bg-forest-800 hover:bg-forest-900 active:bg-emerald-700 text-white flex items-center justify-center shadow-lg border-2 border-emerald-400/60 transition-transform duration-200 active:scale-125 relative cursor-pointer"
+                title="Call Us (Primary or Gowda)"
               >
                 <Phone className="w-5 h-5 text-emerald-300" />
                 <span className="sr-only">Call Us</span>
@@ -200,20 +210,30 @@ export const Navbar: React.FC = () => {
           <div className="pt-3 border-t border-gray-100 flex flex-col gap-2">
             <a
               href={getPhoneLink()}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-forest-800 text-white font-extrabold text-xs shadow-md active:scale-95 transition-transform"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                openCallModal();
+              }}
+              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-forest-800 text-white font-extrabold text-xs shadow-md active:scale-95 transition-transform cursor-pointer"
             >
               <Phone className="w-4 h-4 text-emerald-300" />
-              <span>Call Us: {businessInfo.primaryPhoneDisplay}</span>
+              <span>Call Us: Primary &amp; Gowda</span>
             </a>
 
             <a
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shadow-md active:scale-95 transition-transform"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                openWhatsAppModal();
+              }}
+              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-600 text-white font-extrabold text-xs shadow-md active:scale-95 transition-transform cursor-pointer"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp Us (Official)</span>
+              <span>WhatsApp Us: Primary &amp; Gowda</span>
             </a>
 
             <div className="flex items-center justify-center pt-2 text-xs text-gray-500 gap-1.5 font-medium">
