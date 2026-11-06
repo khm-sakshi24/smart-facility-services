@@ -24,6 +24,74 @@ interface ServicePageProps {
   };
 }
 
+const serviceSeoMetadata: Record<string, { title: string; description: string; ogTitle: string }> = {
+  housekeeping: {
+    title: "Housekeeping Services in Bengaluru & Whitefield | Smart Facility Services",
+    description: "Professional housekeeping, corporate office cleaning, and residential apartment sanitization across Hoodi, Whitefield, Mahadevapura & Bengaluru. 24/7 service.",
+    ogTitle: "Housekeeping & Cleaning Services in Bengaluru | Smart Facility Services",
+  },
+  "electrical-maintenance": {
+    title: "Electrical Maintenance Services in Bengaluru | Smart Facility Services",
+    description: "Licensed electrical maintenance, DG power backup, LT panels, and common area wiring repairs for apartments & commercial layouts in Whitefield & Hoodi.",
+    ogTitle: "Electrical Maintenance Services in Bengaluru | Smart Facility Services",
+  },
+  plumbing: {
+    title: "Plumbing Services in Bengaluru & Whitefield | Smart Facility Services",
+    description: "Commercial and residential plumbing, hydro-pneumatic booster pump maintenance, water pipeline repair, and drainage upkeep across Bengaluru.",
+    ogTitle: "Plumbing Services in Bengaluru | Smart Facility Services",
+  },
+  "hvac-maintenance": {
+    title: "HVAC & AC Maintenance Services in Bengaluru | Smart Facility Services",
+    description: "Commercial AC servicing, VRF/VRV units, basement ventilation jet-fans, and seasonal filter cleaning for properties in Whitefield, Hoodi & Bengaluru.",
+    ogTitle: "HVAC & AC Maintenance Services in Bengaluru | Smart Facility Services",
+  },
+  "security-staffing": {
+    title: "Security Staffing & Guard Services Bengaluru | Smart Facility Services",
+    description: "Regulated security staffing, visitor log verification, gate entry management, and 24/7 perimeter safety monitoring for apartments & corporate premises in Bengaluru.",
+    ogTitle: "Security Staffing & Guard Services in Bengaluru | Smart Facility Services",
+  },
+  "general-maintenance": {
+    title: "Building & Property Maintenance Services Bengaluru | Smart Facility Services",
+    description: "On-site handyman, carpentry, masonry touch-ups, door hardware, tile fixes, and general building upkeep for apartment communities in Whitefield & Hoodi.",
+    ogTitle: "Building & General Maintenance Services in Bengaluru | Smart Facility Services",
+  },
+  "water-tank-cleaning": {
+    title: "Water Tank & Sump Cleaning Services Bengaluru | Smart Facility Services",
+    description: "Hygienic mechanized water tank cleaning, underground potable sump sludge extraction, and UV disinfection for apartment societies in Whitefield, Hoodi & Bengaluru.",
+    ogTitle: "Water Tank & Sump Cleaning Services in Bengaluru | Smart Facility Services",
+  },
+  "consultancy-engineering": {
+    title: "MEP Consultancy & Facility Engineering Audits Bengaluru | Smart Facility Services",
+    description: "Technical MEP audits, builder handover evaluations, energy conservation surveys, and plant design advisory for apartment associations in Bengaluru.",
+    ogTitle: "MEP Consultancy & Facility Engineering Audits Bengaluru | Smart Facility Services",
+  },
+  "stp-etp-wtp-maintenance": {
+    title: "STP, ETP & WTP Operation & Maintenance Bengaluru | Smart Facility Services",
+    description: "KSPCB compliant sewage treatment plant (STP), effluent treatment, and water treatment plant operation & daily maintenance in Whitefield, Hoodi & Bengaluru.",
+    ogTitle: "STP, ETP & WTP Maintenance Services in Bengaluru | Smart Facility Services",
+  },
+  "sewage-tank-cleaning": {
+    title: "Sewage Tank & Septic Sump Cleaning Bengaluru | Smart Facility Services",
+    description: "Mechanized sewage tank cleaning, non-entry vacuum slurry suction, high-pressure jetting, and septic chamber de-sludging in Whitefield, Hoodi & Bengaluru.",
+    ogTitle: "Sewage Tank & Sump Cleaning in Bengaluru | Smart Facility Services",
+  },
+  "swimming-pool-maintenance": {
+    title: "Swimming Pool Maintenance & Chemical Care Bengaluru | Smart Facility Services",
+    description: "Daily pool water testing, pH & chlorine balancing, robotic vacuum suction, and sand filter maintenance for apartment pools in Whitefield, Hoodi & Bengaluru.",
+    ogTitle: "Swimming Pool Maintenance & Chemical Care Bengaluru | Smart Facility Services",
+  },
+  "swimming-pool-rework": {
+    title: "Swimming Pool Repair & Tile Rework Services Bengaluru | Smart Facility Services",
+    description: "Swimming pool tile re-grouting, epoxy repair, elastomeric waterproofing restoration, and filtration pump upgrades for residential societies in Bengaluru.",
+    ogTitle: "Swimming Pool Repair & Tile Rework Services in Bengaluru | Smart Facility Services",
+  },
+  "erection-commissioning-installation-maintenance": {
+    title: "MEP Erection & Equipment Commissioning Bengaluru | Smart Facility Services",
+    description: "Turnkey installation, motor alignment, trial runs, and preventive commissioning for STP blowers, hydro-pneumatic pumps, and MEP plant machinery in Bengaluru.",
+    ogTitle: "MEP Erection & Commissioning in Bengaluru | Smart Facility Services",
+  },
+};
+
 export async function generateStaticParams() {
   return servicesCatalogue.map((service) => ({
     slug: service.slug,
@@ -38,16 +106,27 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     };
   }
 
-  return {
-    title: `${service.title} | Smart Facility Services Bengaluru`,
+  const seo = serviceSeoMetadata[service.slug] || {
+    title: `${service.title} in Bengaluru | Smart Facility Services`,
     description: service.shortDescription,
+    ogTitle: `${service.title} | Smart Facility Services Bengaluru`,
+  };
+
+  const serviceUrl = `${businessInfo.siteUrl}/services/${service.slug}`;
+
+  return {
+    title: seo.title,
+    description: seo.description,
     alternates: {
-      canonical: `/services/${service.slug}`,
+      canonical: serviceUrl,
     },
     openGraph: {
-      title: `${service.title} in Bengaluru`,
-      description: service.shortDescription,
-      url: `https://smartfacilityservices.com/services/${service.slug}`,
+      title: seo.ogTitle,
+      description: seo.description,
+      url: serviceUrl,
+      siteName: businessInfo.name,
+      type: "website",
+      locale: "en_IN",
     },
   };
 }
@@ -63,6 +142,8 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
     .filter((s) => s.slug !== service.slug && s.category === service.category)
     .slice(0, 3);
 
+  const serviceUrl = `${businessInfo.siteUrl}/services/${service.slug}`;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
       <StructuredData
@@ -70,15 +151,15 @@ export default function ServiceDetailPage({ params }: ServicePageProps) {
         serviceData={{
           name: service.title,
           description: service.fullDescription,
-          url: `https://smartfacilityservices.com/services/${service.slug}`,
+          url: serviceUrl,
         }}
       />
       <StructuredData
         type="BreadcrumbList"
         breadcrumbs={[
-          { name: "Home", item: "https://smartfacilityservices.com" },
-          { name: "Services", item: "https://smartfacilityservices.com/services" },
-          { name: service.title, item: `https://smartfacilityservices.com/services/${service.slug}` },
+          { name: "Home", item: businessInfo.siteUrl },
+          { name: "Services", item: `${businessInfo.siteUrl}/services` },
+          { name: service.title, item: serviceUrl },
         ]}
       />
 

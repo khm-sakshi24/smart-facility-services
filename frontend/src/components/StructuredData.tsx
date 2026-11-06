@@ -3,7 +3,7 @@ import { businessInfo } from "@/config/businessInfo";
 import { servicesCatalogue } from "@/config/servicesData";
 
 interface StructuredDataProps {
-  type?: "LocalBusiness" | "Service" | "BreadcrumbList";
+  type?: "LocalBusiness" | "Service" | "BreadcrumbList" | "WebSite";
   serviceData?: {
     name: string;
     description: string;
@@ -149,6 +149,14 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
         name: bc.name,
         item: bc.item,
       })),
+    };
+  } else if (type === "WebSite") {
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: businessInfo.name,
+      alternateName: "Smart Facility Services Bengaluru",
+      url: businessInfo.siteUrl,
     };
   }
 

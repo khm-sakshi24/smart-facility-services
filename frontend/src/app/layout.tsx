@@ -87,6 +87,7 @@ export default function RootLayout({
         <LanguageProvider>
           <ContactModalProvider>
             <StructuredData type="LocalBusiness" />
+            <StructuredData type="WebSite" />
             <WelcomeAnnouncement />
             <Navbar />
             <main className="flex-grow">{children}</main>
